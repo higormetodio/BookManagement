@@ -14,10 +14,16 @@ public class User : BaseEntity
     public bool Active { get; private set; }
     public ICollection<Loan>? Loans { get; private set; }
 
-    public void Update(string email)
+    public void Update(string name, string email, bool active)
     {
-        CoreExceptionValidation.When(string.IsNullOrEmpty(email), "Invalid Email. Email is required");
+        ValidateCore(name, email);
+        Name = name;
         Email = email;
+    }
+
+    public void ToActive(bool active)
+    {
+        Active = active;
     }
 
     public void ValidateCore(string name, string email)
