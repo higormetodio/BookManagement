@@ -30,4 +30,9 @@ public class Loan : BaseEntity
     {
         Status = LoanStatus.Late;
     }
+
+    public void LoanCanceled()
+    {
+        Status = LoanStatus.Canceled;
+    }
 }
