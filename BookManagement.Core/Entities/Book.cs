@@ -22,14 +22,30 @@ public class Book : BaseEntity
     public bool IsReserved { get; private set; }
     public bool Active { get; private set; }
     public BookStock Stock { get; private set; }
-    public ICollection<Loan> Loan { get; private set; }
+    public ICollection<Loan> Loans { get; private set; }
 
-    public void ToReserve()
+
+    public void Update(string title, string author, string iSBN, int publicationYear)
+    {
+        ValidateCore(title, author, iSBN, publicationYear);
+
+        Title = title;
+        Author = author;
+        ISBN = iSBN;
+        PublicationYear = publicationYear;
+
+    }
+    
+    public void ToReserve(bool isReserved)
     {
         CoreExceptionValidation.When(Stock.Quantity > 0, $"There is still {Stock.Quantity} this book");
 
-        IsReserved = true;
-            
+        IsReserved = isReserved; 
+    }
+
+    public void ToActive(bool active)
+    {
+        Active = active;
     }
 
     public void ValidateCore(string title, string author, string iSBN, int publicationYear)
