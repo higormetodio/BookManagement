@@ -11,7 +11,7 @@ public class Book : BaseEntity
         IsReserved = false;
         Active = true;
 
-        Stock = new(1, Id);
+        Stock = new(0, Id);
         
     }
 
@@ -28,12 +28,6 @@ public class Book : BaseEntity
     public void Update(string title, string author, string iSBN, int publicationYear)
     {
         ValidateCore(title, author, iSBN, publicationYear);
-
-        Title = title;
-        Author = author;
-        ISBN = iSBN;
-        PublicationYear = publicationYear;
-
     }
     
     public void ToReserve(bool isReserved)
