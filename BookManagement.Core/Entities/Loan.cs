@@ -3,12 +3,12 @@
 namespace BookManagement.Core.Entities;
 public class Loan : BaseEntity
 {
-    public Loan(int userId, int bookId, DateTime returnDate)
+    public Loan(int userId, int bookId)
     {
         UserId = userId;
         BookId = bookId;
         LoanDate = DateTime.Now;
-        ReturnDate = returnDate;
+        ReturnDate = ReturnDateCalculate(LoanDate);
         Status = LoanStatus.Loaned;
     }
 
@@ -31,8 +31,15 @@ public class Loan : BaseEntity
         Status = LoanStatus.Late;
     }
 
-    public void LoanCanceled()
+    private DateTime ReturnDateCalculate(DateTime loanDate)
     {
-        Status = LoanStatus.Canceled;
+        var returnDate = loanDate.AddDays(15);
+
+        while (returnDate.DayOfWeek == DayOfWeek.Saturday || returnDate.DayOfWeek == DayOfWeek.Sunday)
+        {
+            returnDate = returnDate.AddDays(1);
+        }
+
+        return returnDate;
     }
 }
