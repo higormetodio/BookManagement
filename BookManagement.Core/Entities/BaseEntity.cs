@@ -1,5 +1,5 @@
 ﻿namespace BookManagement.Core.Entities;
-public class BaseEntity
+public abstract class BaseEntity
 {
     protected BaseEntity() { }
     public int Id { get; private set; }
