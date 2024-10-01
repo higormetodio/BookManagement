@@ -14,11 +14,9 @@ public class User : BaseEntity
     public bool Active { get; private set; }
     public ICollection<Loan>? Loans { get; private set; }
 
-    public void Update(string name, string email, bool active)
+    public void Update(string name, string email)
     {
         ValidateCore(name, email);
-        Name = name;
-        Email = email;
     }
 
     public void ToActive(bool active)
