@@ -25,7 +25,7 @@ O projeto consiste em um sistema de gerenciamento de livros, que visa atender al
 
 :white_check_mark: Consulta de um livro e seus empréstimos
 
-:white_check_mark: Atualização do status Ativo do livro e usuário para os casos em que deseja-se reativá-los novamente, já que a deleção não faz a remoção lógica do banco de dados e somente atualiza para que o livro ou o usuário esteja inativo.
+:white_check_mark: Método HTTP Patch - Atualização do status Ativo do livro e usuário para os casos em que deseja-se reativá-los novamente, já que a deleção não faz a remoção lógica do banco de dados e somente atualiza para que o livro ou o usuário esteja inativo.
 
 :white_check_mark: Consulta de um usuário e seus empréstimos
 
