@@ -1,6 +1,5 @@
-﻿using Azure;
-using BookManagement.Application.Commands.DeleteUser;
-using BookManagement.Application.Commands.InsertUser;
+﻿using BookManagement.Application.Commands.DeleteUser;
+using BookManagement.Application.Commands.CreateUser;
 using BookManagement.Application.Commands.UpdateUser;
 using BookManagement.Application.Commands.UpdateUserOnlyActive;
 using BookManagement.Application.Queries.GetAllUsers;
@@ -51,7 +50,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(InsertUserCommand command)
+    public async Task<IActionResult> Post(CreateUserCommand command)
     {
         var result = await _mediator.Send(command);
 

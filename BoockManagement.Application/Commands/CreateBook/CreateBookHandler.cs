@@ -2,17 +2,17 @@
 using BookManagement.Core.Interfaces;
 using MediatR;
 
-namespace BookManagement.Application.Commands.InsertBook;
-public class InserBookHandler : IRequestHandler<InsertBookCommand, ResultViewModel<int>>
+namespace BookManagement.Application.Commands.CreateBook;
+public class CreateBookHandler : IRequestHandler<CreateBookCommand, ResultViewModel<int>>
 {
     private readonly IBookRepository _repository;
 
-    public InserBookHandler(IBookRepository repository)
+    public CreateBookHandler(IBookRepository repository)
     {
         _repository = repository;
     }       
 
-    public async Task<ResultViewModel<int>> Handle(InsertBookCommand request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<int>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
     {
         var book = request.ToEntity();
 

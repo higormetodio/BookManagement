@@ -1,5 +1,5 @@
 ﻿using BookManagement.Application.Commands.DeleteBook;
-using BookManagement.Application.Commands.InsertBook;
+using BookManagement.Application.Commands.CreateBook;
 using BookManagement.Application.Commands.UpdateBook;
 using BookManagement.Application.Commands.UpdateBookOnlyActive;
 using BookManagement.Application.Commands.UpdateBookStock;
@@ -51,7 +51,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post(InsertBookCommand command)
+    public async Task<ActionResult> Post(CreateBookCommand command)
     {
         var result = await _mediator.Send(command);
 

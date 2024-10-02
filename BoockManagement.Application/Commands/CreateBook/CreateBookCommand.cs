@@ -2,8 +2,8 @@
 using BookManagement.Core.Entities;
 using MediatR;
 
-namespace BookManagement.Application.Commands.InsertBook;
-public class InsertBookCommand : IRequest<ResultViewModel<int>>
+namespace BookManagement.Application.Commands.CreateBook;
+public class CreateBookCommand : IRequest<ResultViewModel<int>>
 {
     public string Title { get; set; }
     public string Author { get; set; }

@@ -2,17 +2,17 @@
 using BookManagement.Core.Interfaces;
 using MediatR;
 
-namespace BookManagement.Application.Commands.InsertUser;
-public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewModel<int>>
+namespace BookManagement.Application.Commands.CreateUser;
+public class CreateUserHandler : IRequestHandler<CreateUserCommand, ResultViewModel<int>>
 {
     private readonly IUserRepository _repository;
 
-    public InsertUserHandler(IUserRepository repository)
+    public CreateUserHandler(IUserRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<ResultViewModel<int>> Handle(InsertUserCommand request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<int>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var user = request.ToEntity();
 
