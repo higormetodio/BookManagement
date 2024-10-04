@@ -1,7 +1,12 @@
 ﻿using BookManagement.Core.Entities;
-using BookManagement.Core.Repositories;
+using BookManagement.Core.Interfaces;
 using BookManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BookManagement.Infrastructure.Repositories;
 public class UserRepository : IUserRepository

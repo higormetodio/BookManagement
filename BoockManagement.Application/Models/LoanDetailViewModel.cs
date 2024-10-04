@@ -1,4 +1,5 @@
 ﻿using BookManagement.Core.Entities;
+using BookManagement.Core.Enums;
 
 namespace BookManagement.Application.Models;
 public class LoanDetailViewModel

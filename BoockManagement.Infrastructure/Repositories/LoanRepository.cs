@@ -1,5 +1,5 @@
 ﻿using BookManagement.Core.Entities;
-using BookManagement.Core.Repositories;
+using BookManagement.Core.Interfaces;
 using BookManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,20 +25,16 @@ public class LoanRepository : ILoanRepository
                                        .Include(l => l.User)
                                        .SingleOrDefaultAsync(l => l.Id == id);
     
-    public async Task<int> CreateLoanAsync(Loan loan)
+    public async Task CreateLoanAsync(Loan loan)
     {
         await _context.Loans.AddAsync(loan);
         await _context.SaveChangesAsync();
-
-        return loan.Id;
     }
 
-    public async Task<int> UpdateLoanAsync(Loan loan)
+    public async Task UpdateLoanAsync(Loan loan)
     {
         _context.Loans.Update(loan);
         await _context.SaveChangesAsync();
-
-        return loan.Id;
     }
 
     public async Task CancelLoanAsync(Loan loan)

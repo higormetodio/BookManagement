@@ -1,14 +1,13 @@
-﻿using BookManagement.Core.Exceptions;
+﻿using BookManagement.Core.Enums;
+using BookManagement.Core.Exceptions;
+using System;
 
 namespace BookManagement.Core.Entities;
 public class Book : BaseEntity
 {
     public Book(string title, string author, string iSBN, int publicationYear)
     {
-        Title = title;
-        Author = author;
-        ISBN = iSBN;
-        PublicationYear = publicationYear;
+        ValidateCore(title, author, iSBN, publicationYear);
         IsReserved = false;
         Active = true;
 
@@ -28,10 +27,7 @@ public class Book : BaseEntity
 
     public void Update(string title, string author, string iSBN, int publicationYear)
     {
-        Title = title;
-        Author = author;
-        ISBN = iSBN;
-        PublicationYear = publicationYear;
+        ValidateCore(title, author, iSBN, publicationYear);
     }
     
     public void ToReserve(bool isReserved)
@@ -44,5 +40,18 @@ public class Book : BaseEntity
     public void ToActive(bool active)
     {
         Active = active;
+    }
+
+    public void ValidateCore(string title, string author, string iSBN, int publicationYear)
+    {
+        CoreExceptionValidation.When(string.IsNullOrEmpty(title), "Invalid Title. Title is required.");
+        CoreExceptionValidation.When(string.IsNullOrEmpty(author), "Invalid Author. Author is required.");
+        CoreExceptionValidation.When(string.IsNullOrEmpty(iSBN), "Invalid ISBN. ISBN is required.");
+        CoreExceptionValidation.When(publicationYear <= 1499 || publicationYear > DateTime.Now.Year, $"Invalid Publication Year. The Publication Year is not in the range between 1499 and {DateTime.Now.Year}");
+
+        Title = title;
+        Author = author;
+        ISBN = iSBN;
+        PublicationYear = publicationYear;
     }
 }

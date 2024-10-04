@@ -5,8 +5,7 @@ public class User : BaseEntity
 {
     public User(string name, string email)
     {
-        Name = name;
-        Email = email;
+        ValidateCore(name, email);
         Active = true;
     }
 
@@ -17,12 +16,20 @@ public class User : BaseEntity
 
     public void Update(string name, string email)
     {
-        Name = name;
-        Email = email;
+        ValidateCore(name, email);
     }
 
     public void ToActive(bool active)
     {
         Active = active;
+    }
+
+    public void ValidateCore(string name, string email)
+    {
+        CoreExceptionValidation.When(string.IsNullOrEmpty(name), "Invalid Name. Name is required");
+        CoreExceptionValidation.When(string.IsNullOrEmpty(email), "Invalid Email. Email is required");
+
+        Name = name;
+        Email = email;
     }
 }

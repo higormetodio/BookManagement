@@ -32,7 +32,7 @@ public class BooksController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int:min(1)}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
         var query = new GetBookByIdQuery(id);
@@ -41,7 +41,7 @@ public class BooksController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int:min(1)}/loans")]
+    [HttpGet("{id:int}/loans")]
     public async Task<IActionResult> GetBookByIdLoans(int id)
     {
         var query = new GetBookLoansQuery(id);
@@ -63,9 +63,14 @@ public class BooksController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
     }
 
-    [HttpPut("stock")]
-    public async Task<IActionResult> Put(UpdateBookStockCommand command)
+    [HttpPut("{id:int}/stock")]
+    public async Task<IActionResult> Put(int id, UpdateBookStockCommand command)
     {
+        if (id != command.BookId)
+        {
+            return BadRequest("Id from body does not match the given Id");
+        }
+
         var result = await _mediator.Send(command);
 
         if (!result.IsSuccess)
@@ -76,9 +81,13 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Put(UpdateBookCommand command)
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Put(int id, UpdateBookCommand command)
     {
+        if (id != command.Id)
+        {
+            return BadRequest("Id from body does not match the given Id");
+        }
         var result = await _mediator.Send(command);
 
         if (!result.IsSuccess)
@@ -89,9 +98,14 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
-    [HttpPatch("{id:int:min(1)}/updateBookActive")]
+    [HttpPatch("{id:int}/updateBookActive")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<UpdateBookOnlyActiveCommand> patchBook)
     {
+        if (patchBook is null || id < 1)
+        {
+            return BadRequest("Invalid fields.");
+        }
+
         var updateBookOnlyActive = new UpdateBookOnlyActiveCommand(id);
 
         patchBook.ApplyTo(updateBookOnlyActive);
@@ -106,7 +120,7 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id:int:min(1)}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteBookCommand(id));

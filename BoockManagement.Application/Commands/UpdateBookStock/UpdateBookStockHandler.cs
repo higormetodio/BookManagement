@@ -1,9 +1,9 @@
 ﻿using BookManagement.Application.Models;
-using BookManagement.Core.Repositories;
+using BookManagement.Core.Interfaces;
 using MediatR;
 
 namespace BookManagement.Application.Commands.UpdateBookStock;
-public class UpdateBookStockHandler : IRequestHandler<UpdateBookStockCommand, ResultViewModel>
+public class UpdateBookStockHandler : IRequestHandler<UpdateBookStockCommand, ResultViewModel<int>>
 {
     private readonly IBookRepository _repository;
 
@@ -12,7 +12,7 @@ public class UpdateBookStockHandler : IRequestHandler<UpdateBookStockCommand, Re
         _repository = repository;
     }
 
-    public async Task<ResultViewModel> Handle(UpdateBookStockCommand request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<int>> Handle(UpdateBookStockCommand request, CancellationToken cancellationToken)
     {
         var book = await _repository.GetBookByIdAsync(request.BookId);
 
@@ -23,8 +23,8 @@ public class UpdateBookStockHandler : IRequestHandler<UpdateBookStockCommand, Re
 
         book.Stock.Update(request.Quantity);
 
-        await _repository.UpdateBookStockAsync(book.Stock);
+        _repository.UpdateBookStockAsync(book.Stock);
 
-        return ResultViewModel.Success();
+        return ResultViewModel<int>.Success(book.Id);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using BookManagement.Core.Entities;
-using BookManagement.Core.Repositories;
+using BookManagement.Core.Interfaces;
 using BookManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,19 +40,15 @@ public class BookRepository : IBookRepository
         return book.Id;
     }
 
-    public async Task<int> UpdateBookStockAsync(BookStock stock)
+    public async Task UpdateBookStockAsync(BookStock stock)
     {
          _context.BookStocks.Update(stock);
         await _context.SaveChangesAsync();
-
-        return stock.BookId;
     }
 
-    public async Task<int> UpdateBookAsync(Book book)
+    public async Task UpdateBookAsync(Book book)
     {
         _context.Books.Update(book);
         await _context.SaveChangesAsync();
-
-        return book.Id;
     }
 }
