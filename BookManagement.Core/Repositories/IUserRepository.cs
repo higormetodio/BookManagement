@@ -1,6 +1,6 @@
 ﻿using BookManagement.Core.Entities;
 
-namespace BookManagement.Core.Interfaces;
+namespace BookManagement.Core.Repositories;
 public interface IUserRepository
 {
     Task<IEnumerable<User>> GetAllUsersAsync();

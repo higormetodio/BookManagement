@@ -27,7 +27,7 @@ public class LoansController : ControllerBase
         return Ok(result);
     }
     
-    [HttpGet("{id:int}")]
+    [HttpGet("{id:int:min(1)}")]
     public async Task<IActionResult> GetById(int id)
     {
         var query = new GetLoanByIdQuery(id);
@@ -49,7 +49,7 @@ public class LoansController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
     }
 
-    [HttpPut("{id:int}/returnLoan")]
+    [HttpPut("{id:int:min(1)}/returnLoan")]
     public async Task<IActionResult> Put(int id)
     {
         var command = new ReturnLoanCommand(id);
