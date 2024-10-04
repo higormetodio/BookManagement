@@ -1,4 +1,4 @@
-﻿using BookManagement.Core.Interfaces;
+﻿using BookManagement.Core.Repositories;
 using BookManagement.Infrastructure.Persistence;
 using BookManagement.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;

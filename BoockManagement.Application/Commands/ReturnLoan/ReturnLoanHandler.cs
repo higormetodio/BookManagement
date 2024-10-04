@@ -1,6 +1,6 @@
 ﻿using BookManagement.Application.Models;
 using BookManagement.Core.Enums;
-using BookManagement.Core.Interfaces;
+using BookManagement.Core.Repositories;
 using MediatR;
 
 namespace BookManagement.Application.Commands.ReturnLoan;

@@ -1,11 +1,6 @@
 ﻿using BookManagement.Application.Models;
-using BookManagement.Core.Interfaces;
+using BookManagement.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookManagement.Application.Commands.CreateLoan;
 public class CreateLoanHandler : IRequestHandler<CreateLoanCommand, ResultViewModel<int>>

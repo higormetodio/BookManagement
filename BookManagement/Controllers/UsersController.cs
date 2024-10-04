@@ -31,7 +31,7 @@ public class UsersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("{id:int:min(1)}")]
     public async Task<IActionResult> GetById(int id)
     {
         var query = new GetUserByIdQuery(id);
@@ -40,7 +40,7 @@ public class UsersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int}/loans")]
+    [HttpGet("{id:int:min(1)}/loans")]
     public async Task<IActionResult> GetUserByIdLoans(int id)
     {
         var query = new GetUserLoansQuery(id);
@@ -62,14 +62,9 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<IActionResult> Put(int id, UpdateUserCommand command)
+    [HttpPut]
+    public async Task<IActionResult> Put(UpdateUserCommand command)
     {
-        if (id != command.Id)
-        {
-            return BadRequest("Id from body does not match the given Id");
-        }
-
         var result = await _mediator.Send(command);
 
         if (!result.IsSuccess)
@@ -80,7 +75,7 @@ public class UsersController : ControllerBase
         return NoContent();
     }
 
-    [HttpPatch("{id:int}/UpdateUserActive")]
+    [HttpPatch("{id:int:min(1)}/UpdateUserActive")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<UpdateUserOnlyActiveCommand> patchUser)
     {
         if (patchUser is null || id < 1)
@@ -94,11 +89,16 @@ public class UsersController : ControllerBase
 
         var result = await _mediator.Send(updateUserOnlyActive);
 
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
         return NoContent();
 
     }
 
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id:int:min(1)}")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteUserCommand(id));

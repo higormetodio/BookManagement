@@ -1,11 +1,11 @@
 ﻿using BookManagement.Core.Entities;
 
-namespace BookManagement.Core.Interfaces;
+namespace BookManagement.Core.Repositories;
 public interface ILoanRepository
 {
     Task<IEnumerable<Loan>> GetAllLoansAsync();
     Task<Loan> GetLoanByIdAsync(int id);
-    Task CreateLoanAsync(Loan loan);
-    Task UpdateLoanAsync(Loan loan);
+    Task<int> CreateLoanAsync(Loan loan);
+    Task<int> UpdateLoanAsync(Loan loan);
     Task CancelLoanAsync(Loan loan);
 }
