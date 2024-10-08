@@ -29,11 +29,11 @@ O projeto consiste em um sistema de gerenciamento de livros, que visa atender al
 
 :white_check_mark: Consulta de um usuário e seus empréstimos
 
-:black_square_button: Validação da API utilizando Fluent Validation
+:white_check_mark: Validação da API utilizando Fluent Validation
 
-:black_square_button: Autenticação e Autorização utilizando JWT
+:white_check_mark: Autenticação e Autorização utilizando JWT
 
-:black_square_button: Documentação da API no Swagger
+:white_check_mark: Documentação da API no Swagger
 
 
 ## Temas Abordados :pencil:
