@@ -21,7 +21,7 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, ResultViewMo
             return ResultViewModel.Error("User not found");
         }
 
-        user.Update(request.Name, request.Email);
+        user.Update(request.Name, request.Email, request.BirthDate, request.Password);
 
         await _repository.UpdateUserAsync(user);
 
