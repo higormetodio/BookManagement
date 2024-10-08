@@ -9,11 +9,13 @@ using BookManagement.Application.Queries.GetBookLoans;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookManagement.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "admin")]
 public class BooksController : ControllerBase
 {
     private readonly IMediator _mediator;

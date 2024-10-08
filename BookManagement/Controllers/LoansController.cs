@@ -3,12 +3,14 @@ using BookManagement.Application.Commands.ReturnLoan;
 using BookManagement.Application.Queries.GetAllLoans;
 using BookManagement.Application.Queries.GetLoanById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookManagement.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "admin")]
 public class LoansController : ControllerBase
 {
     private readonly IMediator _mediator;
