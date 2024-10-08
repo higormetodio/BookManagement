@@ -20,9 +20,13 @@ public class UserRepository : IUserRepository
         => await _context.Users.FindAsync(id);
 
     public async Task<User> GetUserLoansByIdAsync(int id)
-        => await _context.Users.Include(u => u.Loans)
+        => await _context.Users.AsNoTracking()
+                               .Include(u => u.Loans)
                                .ThenInclude(l => l.Book)
                                .SingleOrDefaultAsync(u => u.Id == id);
+
+    public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
+        => await _context.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == password);
 
     public async Task<int> CreateUserAsync(User user)
     {
