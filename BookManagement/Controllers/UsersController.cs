@@ -8,11 +8,14 @@ using BookManagement.Application.Queries.GetUserLoans;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using BookManagement.Application.Commands.LoginUser;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookManagement.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -23,6 +26,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Get(string search = "")
     {
         var query = new GetAllUsersQuery(search);
@@ -32,26 +36,52 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id:int:min(1)}")]
+    [Authorize(Roles = "admin, user")]
     public async Task<IActionResult> GetById(int id)
     {
         var query = new GetUserByIdQuery(id);
         var result = await _mediator.Send(query);
 
-        return Ok(result);
+        var loginEmail = User.FindFirst("userName")!.Value;
+        var isAdmin = User.IsInRole("admin");
+
+        if (loginEmail == result.Data.Email || isAdmin)
+        {
+            return Ok(result);
+        }
+
+        return Unauthorized(new { Status = "Erro", Message = "Unauthorized user. User does not have permission to search other users." });  
     }
 
     [HttpGet("{id:int:min(1)}/loans")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetUserByIdLoans(int id)
     {
         var query = new GetUserLoansQuery(id);
         var result = await _mediator.Send(query);
 
-        return Ok(result);
+        var loginEmail = User.FindFirst("userName")!.Value;
+        var isAdmin = User.IsInRole("admin");
+
+        if (loginEmail == result.Data.Email || isAdmin)
+        {
+            return Ok(result);
+        }
+
+        return Unauthorized(new { Status = "Erro", Message = "Unauthorized user. User does not have permission to search other users." });
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Post(CreateUserCommand command)
     {
+        var isAdmin = User.IsInRole("admin");
+
+        if (isAdmin)
+        {
+            command.Role = "admin";
+        }
+
         var result = await _mediator.Send(command);
 
         if (!result.IsSuccess)
@@ -63,6 +93,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Put(UpdateUserCommand command)
     {
         var result = await _mediator.Send(command);
@@ -76,6 +107,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPatch("{id:int:min(1)}/UpdateUserActive")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<UpdateUserOnlyActiveCommand> patchUser)
     {
         if (patchUser is null || id < 1)
@@ -99,6 +131,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{id:int:min(1)}")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteUserCommand(id));
@@ -109,5 +142,19 @@ public class UsersController : ControllerBase
         }
 
         return NoContent();
+    }
+
+    [HttpPut("login")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Login(LoginUserCommand command)
+    {
+        var result = await _mediator.Send(command);
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
+        return Ok(result);
     }
 }
