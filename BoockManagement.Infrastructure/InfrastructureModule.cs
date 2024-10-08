@@ -3,6 +3,8 @@ using BookManagement.Infrastructure.Persistence;
 using BookManagement.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using BookManagement.Core.Services;
+using BookManagement.Infrastructure.Auth;
 
 namespace BookManagement.Infrastructure;
 public static class InfrastructureModule
@@ -16,6 +18,7 @@ public static class InfrastructureModule
         services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ILoanRepository, LoanRepository>();
+        services.AddScoped<IAuthService, AuthService>();
 
         return services;
     }
