@@ -40,9 +40,4 @@ public class LoanRepository : ILoanRepository
 
         return loan.Id;
     }
-
-    public async Task CancelLoanAsync(Loan loan)
-    {
-        throw new NotImplementedException();
-    }
 }

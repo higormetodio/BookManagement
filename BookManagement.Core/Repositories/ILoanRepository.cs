@@ -7,5 +7,4 @@ public interface ILoanRepository
     Task<Loan> GetLoanByIdAsync(int id);
     Task<int> CreateLoanAsync(Loan loan);
     Task<int> UpdateLoanAsync(Loan loan);
-    Task CancelLoanAsync(Loan loan);
 }
