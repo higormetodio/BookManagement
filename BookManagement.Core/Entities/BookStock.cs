@@ -18,8 +18,6 @@ public class BookStock : BaseEntity
 
     public void Update(int quantity)
     {
-        CoreExceptionValidation.When(quantity < 0, "Invalid Quantity. The Quantity must be greater than or equal to zero.");
-
         Quantity = quantity;
     }
 
