@@ -33,7 +33,7 @@ O projeto consiste em um sistema de gerenciamento de livros, que visa atender al
 
 :white_check_mark: Autenticação e Autorização utilizando JWT
 
-:white_check_mark: Documentação da API no Swagger
+:black_square_button: Documentação da API no Swagger
 
 
 ## Temas Abordados :pencil:
