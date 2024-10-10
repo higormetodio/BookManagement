@@ -3,7 +3,7 @@ using BookManagement.Core.Repositories;
 using BookManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookManagement.Infrastructure.Repositories;
+namespace BookManagement.Infrastructure.Persistence.Repositories;
 public class BookRepository : IBookRepository
 {
     private readonly BookManagementDbContext _context;
@@ -27,7 +27,8 @@ public class BookRepository : IBookRepository
                                .SingleOrDefaultAsync(b => b.Id == id);
 
     public async Task<Book> GetBookLoansByIdAsync(int id)
-        => await _context.Books.Include(b => b.Loans)
+        => await _context.Books.AsNoTracking()
+                               .Include(b => b.Loans)
                                .ThenInclude(l => l.User)
                                .Include(b => b.Stock)
                                .SingleOrDefaultAsync(b => b.Id == id);
@@ -42,7 +43,7 @@ public class BookRepository : IBookRepository
 
     public async Task<int> UpdateBookStockAsync(BookStock stock)
     {
-         _context.BookStocks.Update(stock);
+        _context.BookStocks.Update(stock);
         await _context.SaveChangesAsync();
 
         return stock.BookId;

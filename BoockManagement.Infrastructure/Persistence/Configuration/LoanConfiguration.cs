@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BookManagement.Infrastructure.EntitiesConfiguration;
+namespace BookManagement.Infrastructure.Persistence.Configuration;
 public class LoanConfiguration : IEntityTypeConfiguration<Loan>
 {
     public void Configure(EntityTypeBuilder<Loan> builder)

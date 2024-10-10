@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BookManagement.Infrastructure.EntitiesConfiguration;
+namespace BookManagement.Infrastructure.Persistence.Configuration;
 public class BookConfiguration : IEntityTypeConfiguration<Book>
 {
     public void Configure(EntityTypeBuilder<Book> builder)
@@ -27,7 +27,7 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.Property(b => b.ISBN)
                .IsRequired()
                .HasColumnType("NVARCHAR")
-               .HasMaxLength(20);                                     
+               .HasMaxLength(20);
 
         builder.Property(b => b.PublicationYear)
                .IsRequired()

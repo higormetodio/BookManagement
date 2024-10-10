@@ -3,7 +3,7 @@ using BookManagement.Core.Repositories;
 using BookManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookManagement.Infrastructure.Repositories;
+namespace BookManagement.Infrastructure.Persistence.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly BookManagementDbContext _context;

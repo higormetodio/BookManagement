@@ -1,10 +1,10 @@
 ﻿using BookManagement.Core.Repositories;
 using BookManagement.Infrastructure.Persistence;
-using BookManagement.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using BookManagement.Core.Services;
 using BookManagement.Infrastructure.Auth;
+using BookManagement.Infrastructure.Persistence.Repositories;
 
 namespace BookManagement.Infrastructure;
 public static class InfrastructureModule

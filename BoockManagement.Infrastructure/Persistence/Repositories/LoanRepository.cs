@@ -3,7 +3,7 @@ using BookManagement.Core.Repositories;
 using BookManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookManagement.Infrastructure.Repositories;
+namespace BookManagement.Infrastructure.Persistence.Repositories;
 public class LoanRepository : ILoanRepository
 {
     private readonly BookManagementDbContext _context;
@@ -24,7 +24,7 @@ public class LoanRepository : ILoanRepository
                                        .Include(l => l.Book)
                                        .Include(l => l.User)
                                        .SingleOrDefaultAsync(l => l.Id == id);
-    
+
     public async Task<int> CreateLoanAsync(Loan loan)
     {
         await _context.Loans.AddAsync(loan);
