@@ -17,11 +17,11 @@ public class CreateLoanHandler : IRequestHandler<CreateLoanCommand, ResultViewMo
     }
 
     public async Task<ResultViewModel<int>> Handle(CreateLoanCommand request, CancellationToken cancellationToken)
-    {
+    {        
         var loan = request.ToEntity();
 
-        var user = await _userRepository.GetUserByIdAsync(request.UserId);
-        var book = await _bookRepository.GetBookByIdAsync(loan.BookId);
+        var user = await _userRepository.GetUserLoansByIdAsync(request.UserId);
+        var book = await _bookRepository.GetBookLoansByIdAsync(loan.BookId);
 
         if (user is null || !user.Active)
         {
@@ -32,7 +32,14 @@ public class CreateLoanHandler : IRequestHandler<CreateLoanCommand, ResultViewMo
         {
             return ResultViewModel<int>.Error("Book not found.");
         }
-        
+
+        var hasBook = user.Loans.Any(l => l.BookId == book.Id);
+
+        if (hasBook)
+        {
+            return ResultViewModel<int>.Error($"This user already has a book \"{book.Title}\" loaned");
+        }
+
         if (book.Stock.Quantity <= 0)
         {
             return ResultViewModel<int>.Error("There is no book available.");
