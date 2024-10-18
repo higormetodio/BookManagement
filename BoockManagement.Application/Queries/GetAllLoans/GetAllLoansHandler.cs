@@ -2,6 +2,7 @@
 using BookManagement.Core.Enums;
 using BookManagement.Core.Repositories;
 using MediatR;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookManagement.Application.Queries.GetAllLoans;
 public class GetAllLoansHandler : IRequestHandler<GetAllLoansQuery, ResultViewModel<IEnumerable<LoanViewModel>>>
@@ -17,11 +18,16 @@ public class GetAllLoansHandler : IRequestHandler<GetAllLoansQuery, ResultViewMo
     {
         var loans = await _repository.GetAllLoansAsync();
 
-        loans = loans.Where(l => l.Status != LoanStatus.Returned);
+        loans = loans.Where(l => l.Status != LoanStatus.Returned).ToList();
 
         if (!string.IsNullOrEmpty(request.Query))
         {
-            loans = loans.Where(l => l.Book.Title.ToLower().Contains(request.Query.ToLower()));
+            loans = loans.Where(l => l.Book.Title.ToLower().Contains(request.Query.ToLower())).ToList();
+        }
+
+        if (loans.IsNullOrEmpty())
+        {
+            return ResultViewModel<IEnumerable<LoanViewModel>>.Error("Loans not found.");
         }
 
         var model = loans.Select(LoanViewModel.FromEntity);

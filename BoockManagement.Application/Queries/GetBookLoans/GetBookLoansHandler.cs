@@ -1,4 +1,5 @@
 ﻿using BookManagement.Application.Models;
+using BookManagement.Core.Enums;
 using BookManagement.Core.Repositories;
 using MediatR;
 

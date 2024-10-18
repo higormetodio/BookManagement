@@ -1,13 +1,14 @@
 ﻿using BookManagement.Application.Models;
 using BookManagement.Core.Repositories;
 using MediatR;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookManagement.Application.Queries.GetAllUsers;
-public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, ResultViewModel<IEnumerable<UserViewModel>>>
+public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, ResultViewModel<IEnumerable<UserViewModel>>>
 {
     private readonly IUserRepository _repository;
 
-    public GetUsersHandler(IUserRepository repository)
+    public GetAllUsersHandler(IUserRepository repository)
     {
         _repository = repository;
     }
@@ -16,11 +17,16 @@ public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, ResultViewModel
     {
         var users = await _repository.GetAllUsersAsync();
 
-        users = users.Where(u => u.Active);
+        users = users.Where(u => u.Active).ToList();
 
-        if (!string.IsNullOrEmpty(request.Query))
+        if (!request.Query.IsNullOrEmpty())
         {
-            users = users.Where(u => u.Name.ToLower().Contains(request.Query.ToLower()));
+            users = users.Where(u => u.Name.ToLower().Contains(request.Query.ToLower())).ToList();
+        }
+
+        if (users.IsNullOrEmpty())
+        {
+            return ResultViewModel<IEnumerable<UserViewModel>>.Error("Users with searched criteria, not found.");
         }
 
         var model = users.Select(UserViewModel.FromEntity);

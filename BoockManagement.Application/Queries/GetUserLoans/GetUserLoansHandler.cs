@@ -3,11 +3,11 @@ using BookManagement.Core.Repositories;
 using MediatR;
 
 namespace BookManagement.Application.Queries.GetUserLoans;
-public class GetUserLoanHandler : IRequestHandler<GetUserLoansQuery, ResultViewModel<UserLoansViewModel>>
+public class GetUserLoansHandler : IRequestHandler<GetUserLoansQuery, ResultViewModel<UserLoansViewModel>>
 {
     private readonly IUserRepository _repository;
 
-    public GetUserLoanHandler(IUserRepository repository)
+    public GetUserLoansHandler(IUserRepository repository)
     {
         _repository = repository;
     }
@@ -21,7 +21,7 @@ public class GetUserLoanHandler : IRequestHandler<GetUserLoansQuery, ResultViewM
             return ResultViewModel<UserLoansViewModel>.Error("User not found.");
         }
 
-        var loans = user.Loans.Select(LoanWithUserViewModel.FromEntity);
+        var loans = user.Loans.Select(LoanWithBookViewModel.FromEntity);
 
         var model = new UserLoansViewModel(user.Id, user.Name, user.Email, loans);
 

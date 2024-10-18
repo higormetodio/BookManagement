@@ -19,7 +19,7 @@ public class GetLoanByIdHandler : IRequestHandler<GetLoanByIdQuery, ResultViewMo
 
         if (loan is null || loan.Status == LoanStatus.Returned)
         {
-            ResultViewModel<LoanDetailViewModel>.Error("Loan not found.");
+            return ResultViewModel<LoanDetailViewModel>.Error("Loan not found.");
         }
 
         var model = LoanDetailViewModel.FromEntity(loan);

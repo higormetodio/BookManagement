@@ -1,6 +1,7 @@
 ﻿using BookManagement.Application.Models;
 using BookManagement.Core.Repositories;
 using MediatR;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookManagement.Application.Queries.GetAllBooks;
 public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, ResultViewModel<IEnumerable<BookviewModel>>>
@@ -16,11 +17,16 @@ public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, ResultViewMo
     {
         var books = await _repository.GetAllBooksAsync();
 
-        books = books.Where(b => b.Active);
+        books = books.Where(b => b.Active).ToList();
 
-        if (!string.IsNullOrEmpty(request.Query))
+        if (!request.Query.IsNullOrEmpty())
         {
-            books = books.Where(b => b.Title.ToLower().Contains(request.Query.ToLower()));
+            books = books.Where(b => b.Title.ToLower().Contains(request.Query.ToLower())).ToList();
+        }
+
+        if (books.IsNullOrEmpty())
+        {
+            return ResultViewModel<IEnumerable<BookviewModel>>.Error("Books with searched criteria, not found.");
         }
 
         var model = books.Select(BookviewModel.FromEntity);
