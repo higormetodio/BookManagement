@@ -35,6 +35,8 @@ O projeto consiste em um sistema de gerenciamento de livros, que visa atender al
 
 :black_square_button: Documentação da API no Swagger
 
+:white_check_mark: Testes Unitátios com XUnit
+
 
 ## Temas Abordados :pencil:
 :arrow_forward: Arquitetura Limpa
@@ -47,6 +49,8 @@ O projeto consiste em um sistema de gerenciamento de livros, que visa atender al
 
 :arrow_forward: Programação Assíncrona
 
+:arrow_forward: Testes Unitários
+
 ## Tecnologias
 :arrow_forward: [C#](https://learn.microsoft.com/en-us/dotnet/csharp/)
 
@@ -57,6 +61,8 @@ O projeto consiste em um sistema de gerenciamento de livros, que visa atender al
 :arrow_forward: [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 
 :arrow_forward: [Swagger](https://swagger.io/)
+
+:arrow_forward: [XUnit](https://xunit.net/)
 
 
 ## Docker Desktop com SQL Server
