@@ -26,10 +26,15 @@ public class BooksController : ControllerBase
     }    
 
     [HttpGet]
-    public async Task<IActionResult> Get(string search = "")
+    public async Task<IActionResult> Get(string title = "")
     {
-        var query = new GetAllBooksQuery(search);
+        var query = new GetAllBooksQuery(title);
         var result = await _mediator.Send(query);
+
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
 
         return Ok(result);
     }
@@ -40,6 +45,11 @@ public class BooksController : ControllerBase
         var query = new GetBookByIdQuery(id);
         var result = await _mediator.Send(query);
 
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
+
         return Ok(result);
     }
 
@@ -49,6 +59,11 @@ public class BooksController : ControllerBase
         var query = new GetBookLoansQuery(id);
         var result = await _mediator.Send(query);
 
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
+
         return Ok(result);
     }
 
@@ -56,11 +71,6 @@ public class BooksController : ControllerBase
     public async Task<ActionResult> Post(CreateBookCommand command)
     {
         var result = await _mediator.Send(command);
-
-        if (!result.IsSuccess)
-        {
-            return BadRequest(result.Message);
-        }
 
         return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
     }
@@ -94,6 +104,11 @@ public class BooksController : ControllerBase
     [HttpPatch("{id:int:min(1)}/updateBookActive")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<UpdateBookOnlyActiveCommand> patchBook)
     {
+        if (patchBook is null || id < 1)
+        {
+            return BadRequest("Invalid fields.");
+        }
+
         var updateBookOnlyActive = new UpdateBookOnlyActiveCommand(id);
 
         patchBook.ApplyTo(updateBookOnlyActive);

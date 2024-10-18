@@ -26,6 +26,11 @@ public class LoansController : ControllerBase
         var query = new GetAllLoansQuery(search);
         var result = await _mediator.Send(query);
 
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
+
         return Ok(result);
     }
     
@@ -34,6 +39,11 @@ public class LoansController : ControllerBase
     {
         var query = new GetLoanByIdQuery(id);
         var result = await _mediator.Send(query);
+
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
 
         return Ok(result);
     }

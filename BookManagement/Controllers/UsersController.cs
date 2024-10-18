@@ -27,10 +27,15 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = "admin")]
-    public async Task<IActionResult> Get(string search = "")
+    public async Task<IActionResult> Get(string name = "")
     {
-        var query = new GetAllUsersQuery(search);
+        var query = new GetAllUsersQuery(name);
         var result = await _mediator.Send(query);
+
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
 
         return Ok(result);
     }
@@ -41,6 +46,11 @@ public class UsersController : ControllerBase
     {
         var query = new GetUserByIdQuery(id);
         var result = await _mediator.Send(query);
+
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
 
         var loginEmail = User.FindFirst("userName")!.Value;
         var isAdmin = User.IsInRole("admin");
@@ -59,6 +69,11 @@ public class UsersController : ControllerBase
     {
         var query = new GetUserLoansQuery(id);
         var result = await _mediator.Send(query);
+
+        if (!result.IsSuccess)
+        {
+            return NotFound(result.Message);
+        }
 
         var loginEmail = User.FindFirst("userName")!.Value;
         var isAdmin = User.IsInRole("admin");
@@ -83,11 +98,6 @@ public class UsersController : ControllerBase
         }
 
         var result = await _mediator.Send(command);
-
-        if (!result.IsSuccess)
-        {
-            return BadRequest(result.Message);
-        }
 
         return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
     }
