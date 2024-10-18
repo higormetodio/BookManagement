@@ -30,7 +30,7 @@ public class DeleteBookHandler : IRequestHandler<DeleteBookCommand, ResultViewMo
         }
 
         book.ToActive(false);
-        _repository.UpdateBookAsync(book);
+        await _repository.UpdateBookAsync(book);
 
         return ResultViewModel.Success();
     }

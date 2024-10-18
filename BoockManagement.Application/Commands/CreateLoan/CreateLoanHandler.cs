@@ -17,11 +17,9 @@ public class CreateLoanHandler : IRequestHandler<CreateLoanCommand, ResultViewMo
     }
 
     public async Task<ResultViewModel<int>> Handle(CreateLoanCommand request, CancellationToken cancellationToken)
-    {        
-        var loan = request.ToEntity();
-
+    {     
         var user = await _userRepository.GetUserLoansByIdAsync(request.UserId);
-        var book = await _bookRepository.GetBookLoansByIdAsync(loan.BookId);
+        var book = await _bookRepository.GetBookByIdAsync(request.BookId);
 
         if (user is null || !user.Active)
         {
@@ -44,6 +42,8 @@ public class CreateLoanHandler : IRequestHandler<CreateLoanCommand, ResultViewMo
         {
             return ResultViewModel<int>.Error("There is no book available.");
         }
+
+        var loan = request.ToEntity();
 
         await _loanRepository.CreateLoanAsync(loan);        
         

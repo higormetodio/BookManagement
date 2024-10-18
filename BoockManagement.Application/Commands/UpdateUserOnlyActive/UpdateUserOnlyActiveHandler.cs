@@ -21,6 +21,11 @@ public class UpdateUserOnlyActiveHandler : IRequestHandler<UpdateUserOnlyActiveC
             return ResultViewModel.Error("User not found.");
         }
 
+        if (user.Active)
+        {
+            return ResultViewModel.Error("User is already active.");
+        }
+
         user.ToActive(request.Active);
 
         await _repository.UpdateUserAsync(user);

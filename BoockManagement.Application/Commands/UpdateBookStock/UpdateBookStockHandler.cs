@@ -16,9 +16,9 @@ public class UpdateBookStockHandler : IRequestHandler<UpdateBookStockCommand, Re
     {
         var book = await _repository.GetBookByIdAsync(request.BookId);
 
-        if (book is null)
+        if (book is null || !book.Active)
         {
-            return ResultViewModel<int>.Error("Book does not exist.");
+            return ResultViewModel<int>.Error("Book not found.");
         }
 
         book.Stock.Update(request.Quantity);

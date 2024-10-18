@@ -16,7 +16,7 @@ public class UpdateBookHandler : IRequestHandler<UpdateBookCommand, ResultViewMo
     {
         var book = await _repository.GetBookByIdAsync(request.Id);
 
-        if (book is null)
+        if (book is null || !book.Active)
         {
             return ResultViewModel.Error("Book not found");
         }

@@ -17,7 +17,7 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, ResultViewMo
     {
         var user = await _repository.GetUserLoansByIdAsync(request.Id);
 
-        if (user is null)
+        if (user is null || !user.Active)
         {
             return ResultViewModel.Error("User not found.");
         }

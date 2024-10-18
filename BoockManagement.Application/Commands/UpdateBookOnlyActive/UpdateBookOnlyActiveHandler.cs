@@ -21,6 +21,11 @@ public class UpdateBookOnlyActiveHandler : IRequestHandler<UpdateBookOnlyActiveC
             return ResultViewModel.Error("Book not found.");
         }
 
+        if (book.Active)
+        {
+            return ResultViewModel.Error("Book is already active.");
+        }
+
         book.ToActive(request.Active);
         await _repository.UpdateBookAsync(book);
 
