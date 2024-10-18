@@ -15,8 +15,8 @@ public class BookRepository : IBookRepository
 
     public async Task<IEnumerable<Book>> GetAllBooksAsync()
     {
-        var books = await _context.Books.Include(s => s.Stock)
-                                        .AsNoTracking()
+        var books = await _context.Books.AsNoTracking()
+                                        .Include(s => s.Stock)                                        
                                         .ToListAsync();
 
         return books;

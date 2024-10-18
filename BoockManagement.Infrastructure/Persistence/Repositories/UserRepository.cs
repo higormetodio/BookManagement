@@ -14,10 +14,11 @@ public class UserRepository : IUserRepository
     }
 
     public async Task<IEnumerable<User>> GetAllUsersAsync()
-        => await _context.Users.AsNoTracking().ToListAsync();
+        => await _context.Users.AsNoTracking()
+                               .ToListAsync();
 
     public async Task<User> GetUserByIdAsync(int id)
-        => await _context.Users.FindAsync(id);
+        => await _context.Users.SingleOrDefaultAsync(b => b.Id == id);
 
     public async Task<User> GetUserLoansByIdAsync(int id)
         => await _context.Users.AsNoTracking()
