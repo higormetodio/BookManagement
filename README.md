@@ -79,7 +79,11 @@ docker run --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=1q2w3e4r@#$
 
 ## Pacotes instalados
 :arrow_forward: Microsoft.EntityFrameworkCore.SqlServer
+
 :arrow_forward: MediatR
+
 :arrow_forward: Microsoft.AspNetCore.JsonPatch
+
 :arrow_forward: Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
 :arrow_forward: Swashbuckle.AspNetCore
