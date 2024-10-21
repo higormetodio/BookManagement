@@ -1,5 +1,6 @@
 using BookManagement.API.Filters;
 using BookManagement.Application;
+using BookManagement.Application.Email;
 using BookManagement.Application.ExceptionHandler;
 using BookManagement.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,7 +25,10 @@ builder.Services.AddExceptionHandler<ConfigureExceptionHandler>();
 builder.Services.AddProblemDetails();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SMTP"));
+
 builder.Services.AddInfrastructure();
+
 builder.Services.AddApplication();
 
 
