@@ -5,8 +5,6 @@ using BookManagement.Application.Email;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using BookManagement.Core.Repositories;
-using BookManagement.Infrastructure.Persistence.Repositories;
 
 namespace BookManagement.Application;
 public static class AddApplicationModule
