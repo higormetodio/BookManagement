@@ -16,6 +16,7 @@ namespace BookManagement.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
+[Produces("application/json")]
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -25,6 +26,11 @@ public class UsersController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Get a list of all User objects or some User objects by User Name 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns>A list Users objects or some Users objects by User Name</returns>
     [HttpGet]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> Get(string name = "")
@@ -40,6 +46,11 @@ public class UsersController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Get a User object by User Id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>A User objcet by User Id</returns>
     [HttpGet("{id:int:min(1)}")]
     [Authorize(Roles = "admin, user")]
     public async Task<IActionResult> GetById(int id)
@@ -63,6 +74,11 @@ public class UsersController : ControllerBase
         return Unauthorized(new { Status = "Erro", Message = "Unauthorized user. User does not have permission to search other users." });  
     }
 
+    /// <summary>
+    /// Get a User object by User Id with all Loans
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>A User object by User Id with all Loans</returns>
     [HttpGet("{id:int:min(1)}/loans")]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetUserByIdLoans(int id)
@@ -86,6 +102,23 @@ public class UsersController : ControllerBase
         return Unauthorized(new { Status = "Erro", Message = "Unauthorized user. User does not have permission to search other users." });
     }
 
+    /// <summary>
+    /// Create a new User object
+    /// </summary>
+    /// <remarks>
+    /// Request example
+    /// 
+    ///     POST api/version/users
+    ///     {
+    ///         "name": "Raphael Pedreira",
+    ///         "email": "raphael@gmail.com",
+    ///         "birthDate": "1987-7-3",
+    ///         "password": "12@34#56Ab"
+    ///     }
+    /// </remarks>
+    /// <param name="command"></param>
+    /// <returns>A new Book object created</returns>
+    /// <remarks>Return a new Book object created</remarks>
     [HttpPost]
     [AllowAnonymous]
     public async Task<IActionResult> Post(CreateUserCommand command)
@@ -102,6 +135,11 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
     }
 
+    /// <summary>
+    /// Update an existing User object
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns>Does not return contetnt</returns>
     [HttpPut]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> Put(UpdateUserCommand command)
@@ -116,7 +154,25 @@ public class UsersController : ControllerBase
         return NoContent();
     }
 
-    [HttpPatch("{id:int:min(1)}/UpdateUserActive")]
+    /// <summary>
+    /// Update only the status Active of an existing User object
+    /// </summary>
+    /// <remarks>
+    /// Request example
+    /// 
+    ///     PATCH api/version/users/id/updateUserActive
+    ///     [
+    ///         {
+    ///             "path": "/Active",
+    ///             "op": "replace",
+    ///             "value": "true"
+    ///         }
+    ///     ]
+    /// </remarks>
+    /// <param name="id"></param>
+    /// <param name="patchUser"></param>
+    /// <returns>Does not return contetnt</returns>
+    [HttpPatch("{id:int:min(1)}/updateUserActive")]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<UpdateUserOnlyActiveCommand> patchUser)
     {
@@ -140,6 +196,11 @@ public class UsersController : ControllerBase
 
     }
 
+    /// <summary>
+    /// Update an existing User object with status Active = false
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Does not return contetnt</returns>
     [HttpDelete("{id:int:min(1)}")]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> Delete(int id)
@@ -154,6 +215,11 @@ public class UsersController : ControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Login an existing User object
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns>A login user with email and token</returns>
     [HttpPut("login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(LoginUserCommand command)
