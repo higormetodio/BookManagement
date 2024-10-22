@@ -18,7 +18,7 @@ public class BookViewModelTests
         var book = await _bookRepository.GetBookByIdAsync(1);
 
         //Act
-        var bookViewModel = BookviewModel.FromEntity(book);
+        var bookViewModel = BookViewModel.FromEntity(book);
 
         //Assert
         Assert.NotNull(bookViewModel);
