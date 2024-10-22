@@ -79,7 +79,7 @@ public class UsersController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns>A User object by User Id with all Loans</returns>
-    [HttpGet("{id:int:min(1)}/loans")]
+    [HttpGet("loans/{id:int:min(1)}")]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetUserByIdLoans(int id)
     {
@@ -172,7 +172,7 @@ public class UsersController : ControllerBase
     /// <param name="id"></param>
     /// <param name="patchUser"></param>
     /// <returns>Does not return contetnt</returns>
-    [HttpPatch("{id:int:min(1)}/updateUserActive")]
+    [HttpPatch("updateUserActive/{id:int:min(1)}")]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<UpdateUserOnlyActiveCommand> patchUser)
     {

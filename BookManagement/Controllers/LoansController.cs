@@ -93,7 +93,7 @@ public class LoansController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns>Does not return contetnt</returns>
-    [HttpPut("{id:int:min(1)}/returnLoan")]
+    [HttpPut("returnLoan/{id:int:min(1)}")]
     public async Task<IActionResult> Put(int id)
     {
         var command = new ReturnLoanCommand(id);

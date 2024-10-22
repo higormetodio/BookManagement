@@ -69,7 +69,7 @@ public class BooksController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns>A Book object by Book Id with all Loans</returns>
-    [HttpGet("{id:int:min(1)}/loans")]
+    [HttpGet("loans/{id:int:min(1)}")]
     public async Task<IActionResult> GetBookByIdLoans(int id)
     {
         var query = new GetBookLoansQuery(id);
@@ -150,7 +150,7 @@ public class BooksController : ControllerBase
     /// <remarks>
     /// Request example
     /// 
-    ///     PATCH api/version/books/id/updateBookActive
+    ///     PATCH api/version/books/updateBookActive/id
     ///     [
     ///         {
     ///             "path": "/Active",
@@ -162,7 +162,7 @@ public class BooksController : ControllerBase
     /// <param name="id"></param>
     /// <param name="patchBook"></param>
     /// <returns>Does not return contetnt</returns>
-    [HttpPatch("{id:int:min(1)}/updateBookActive")]
+    [HttpPatch("updateBookActive/{id:int:min(1)}")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<UpdateBookOnlyActiveCommand> patchBook)
     {
         if (patchBook is null || id < 1)
