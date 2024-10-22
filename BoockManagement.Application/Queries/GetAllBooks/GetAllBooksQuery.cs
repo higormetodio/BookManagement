@@ -2,7 +2,7 @@
 using MediatR;
 
 namespace BookManagement.Application.Queries.GetAllBooks;
-public class GetAllBooksQuery : IRequest<ResultViewModel<IEnumerable<BookviewModel>>>
+public class GetAllBooksQuery : IRequest<ResultViewModel<IEnumerable<BookViewModel>>>
 {
     public GetAllBooksQuery(string query)
     {

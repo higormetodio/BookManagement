@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BookManagement.Application.Queries.GetAllBooks;
-public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, ResultViewModel<IEnumerable<BookviewModel>>>
+public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, ResultViewModel<IEnumerable<BookViewModel>>>
 {
     private readonly IBookRepository _repository;
 
@@ -13,7 +13,7 @@ public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, ResultViewMo
         _repository = repository;
     }
 
-    public async Task<ResultViewModel<IEnumerable<BookviewModel>>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<IEnumerable<BookViewModel>>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
     {
         var books = await _repository.GetAllBooksAsync();
 
@@ -26,11 +26,11 @@ public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, ResultViewMo
 
         if (books.IsNullOrEmpty())
         {
-            return ResultViewModel<IEnumerable<BookviewModel>>.Error("Books with searched criteria, not found.");
+            return ResultViewModel<IEnumerable<BookViewModel>>.Error("Books with searched criteria, not found.");
         }
 
-        var model = books.Select(BookviewModel.FromEntity);
+        var model = books.Select(BookViewModel.FromEntity);
 
-        return ResultViewModel<IEnumerable<BookviewModel>>.Success(model);
+        return ResultViewModel<IEnumerable<BookViewModel>>.Success(model);
     }
 }

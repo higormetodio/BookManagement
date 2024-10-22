@@ -1,9 +1,9 @@
 ﻿using BookManagement.Core.Entities;
 
 namespace BookManagement.Application.Models;
-public class BookviewModel
+public class BookViewModel
 {
-    public BookviewModel(int id, string title, string author, int publicationYear, bool isReserved)
+    public BookViewModel(int id, string title, string author, int publicationYear, bool isReserved)
     {
         Id = id;
         Title = title;
@@ -18,6 +18,6 @@ public class BookviewModel
     public int PublicationYear { get; set; }
     public bool IsReserved { get; private set; }
 
-    public static BookviewModel FromEntity(Book entity)
+    public static BookViewModel FromEntity(Book entity)
         => new(entity.Id, entity.Title, entity.Author, entity.PublicationYear, entity.IsReserved);
 }
