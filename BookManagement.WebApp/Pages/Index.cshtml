@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="text-center">
+    <h2 class="display-4">Bem vindo ao <b>BookManagement WebApp</b></h2>
+
+    @if (Model.Loans.Count() > 0)
+    {
+        <div class="pt-3">
+            <h2 class="text-danger">Empréstimos Atrasados</h2>
+            <br />
+            <partial name="_ListLoansPartial" model="@Model.Loans"/>
+        </div>
+    }
+    
+</div>
+

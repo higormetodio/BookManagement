@@ -1,0 +1,67 @@
+﻿@{
+    var targetPage = ViewContext.RouteData.Values["page"]?.ToString();
+    var indexPage = targetPage == "/Index" ? "active" : "";
+    var booksPage = targetPage == "/Books/Index" ? "active" : "";
+    var usersPage = targetPage == "/Users/LoginUser" ? "active" : "";
+    var loansPage = targetPage == "/Loans/Index" ? "active" : "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookManagement - WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BookManagement.WebApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-secondary bg-opacity-75 bg-gradient border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">BookManagement - WebApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex">
+                    <ul class="navbar-nav flex-grow-1 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link @indexPage" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @booksPage" asp-area="" asp-page="/Books/Index">Livros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @usersPage" asp-area="" asp-page="/Users/Index">Usuários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @loansPage" asp-area="" asp-page="/Loans/Index">Empréstimos</a>
+                        </li>
+                    </ul>
+                </div>
+                <partial name="_LogoutPartial"></partial>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - BookManagement - WebApp
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Users.UsersInavtiveModel
+@{
+}
+
+
+<h2>Usuários Inativos</h2>
+<hr />
+
+<partial name="_MessagePartial"></partial>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Users/Index" class="btn btn-secondary">
+                    <span title="Listar Usuários" class="fas fa-plus"></span>Listar Usuários
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col" class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td class="text-center">
+                        <a asp-page="/Users/ActiveUser" asp-route-id="@user.Id" title="Reativar" class="btn btn-sm btn-success bi bi-arrow-left-square"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

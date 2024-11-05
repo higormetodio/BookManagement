@@ -1,0 +1,36 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Books.CreateBookModel
+@{
+    ViewData["Title"] = "Cadastrar Livro";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Cadastrar Livro</h2>
+
+        <partial name="_MessagePartial"></partial>
+        
+        <form class="row" method="post">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input asp-for="Title" class="form-control" style="width: 550px" autofocus />
+            </div>
+            <div class="mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <input asp-for="Author" class="form-control" style="width: 400px;" />
+            </div>
+            <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input asp-for="ISBN" class="form-control" style="width: 200px;" />
+            </div>
+            <div class="mb-3">
+                <label for="ano-publicacao" class="form-label">Ano de Publicação</label>
+                <input asp-for="PublicationYear" class="form-control" style="width: 100px;" />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <button class="btn btn-primary btn-success" type="submit">Salvar</button>
+                <a asp-page="/Books/Index" class="btn btn-outline-secondary">Cancelar</a>                
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Loans.CreateLoanModel
+@{
+    ViewData["Title"] = "Cadastrar Empréstimo";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Cadastrar Empréstimo</h2>
+
+        <partial name="_MessagePartial"></partial>
+
+        <form class="row" method="post">
+            <div class="mb-3">
+                <label asp-for="UserId" class="form-label">Usuário</label>
+                <select asp-for="UserId" asp-items="@(new SelectList(Model.Users, nameof(UserViewModel.Id), nameof(UserViewModel.Name)))" class="form-select">
+                    <option value="" selected>Selecione o usuário</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="BookId" class="form-label">Livro</label>
+                <select asp-for="BookId" asp-items="@(new SelectList(Model.Books, nameof(BookViewModel.Id), nameof(BookViewModel.Title)))" class="form-select">
+                    <option value="" selected> Selecione o livro</option>
+                </select>
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <button class="btn btn-primary btn-success" type="submit">Salvar</button>
+                <a asp-page="/Loans/Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

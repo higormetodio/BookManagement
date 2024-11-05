@@ -1,0 +1,24 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Empréstimos";
+}
+
+<h2>Empréstimos</h2>
+<hr />
+
+<partial name="_MessagePartial" />
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Loans/CreateLoan" class="btn btn-primary">
+                    <span title="Cadastrar Empréstimo" class="fas fa-plus"></span>Novo Empréstimo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<partial name="_ListLoansPartial" model="@Model.Loans" />

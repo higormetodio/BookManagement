@@ -1,0 +1,20 @@
+﻿@if (TempData.ContainsKey("mensage"))
+{
+    var mensage = TempData["mensage"].ToString();
+    var isError = Convert.ToBoolean(TempData["error"]);
+
+    @if (isError)
+    {
+        <div class="alert alert-warning mt-3 mb-3 alert-dismissible fade show validation-summary-erros" role="alert">
+            @mensage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success mt-3 mb-3 alert-dismissible fade show validation-summary-erros" role="alert">
+            @mensage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+}

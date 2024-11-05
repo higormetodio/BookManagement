@@ -1,0 +1,39 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Books.DeleteBookModel
+@{
+    ViewData["Title"] = "Exclusão do Livro";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Exclusão do Livro</h2>
+        <br />
+        <h4 class="text-danger text-center">Deseja realmente excluir o livro abaixo?</h4>
+
+        <partial name="_MessagePartial" />
+
+        <form class="row" method="post">
+            <input type="hidden" asp-for="@Model.Book.Id" />
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" id="titulo" class="form-control" style="width: 550px" value="@Model.Book.Title" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <input type="text" id="autor" class="form-control" style="width: 400px;" value="@Model.Book.Author" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" id="isbn" class="form-control" style="width: 200px;" value="@Model.Book.ISBN" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="ano-publicacao" class="form-label">Ano de Publicação</label>
+                <input type="text" id="ano-publicacao" class="form-control" style="width: 100px;" value="@Model.Book.PublicationYear" readonly />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <a asp-page="/Books/BookDetails" asp-route-id="@Model.Book.Id" class="btn btn-outline-secondary">Não</a>
+                <button class="btn btn-primary btn-danger" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
+</div>

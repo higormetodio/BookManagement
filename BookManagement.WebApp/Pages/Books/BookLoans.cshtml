@@ -1,0 +1,56 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Books.BookLoansModel
+@{
+    ViewData["Title"] = "Empréstimos do Livro";
+}
+
+<div class="text-center">
+    <h2 class="display-4"></h2>
+    <h2 class="pt-3">Empréstimos do Livro <b style="color: cornflowerblue">@Model.Book.Title</b></h2>
+    <hr />
+    <div class="pt-3">
+        <a asp-page="/Books/Index" title="Retornar" class="btn btn-outline-primary">Retornar</a>
+    </div>
+    <div>
+        @if (Model.Book.Loans.Count() > 0)
+        {
+            <div class="pt-3">
+                <div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Usuário</th>
+                                <th scope="col">Data do Empréstimo</th>
+                                <th scope="col">Data do Devolução</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" style="text-align: center">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var loan in Model.Book.Loans)
+                            {
+                                <tr>
+                                    <td>@loan.LoanId</td>
+                                    <td>@loan.UserName</td>
+                                    <td>@loan.LoanDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@loan.ReturnDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@loan.Status</td>
+                                    <td style="text-align: center">
+                                        <a asp-page-handler="GetByIdAsync" asp-route-id="@loan.LoanId" title="Detalhar" class="btn btn-sm btn-secondary btn-info bi bi-list-ul"></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="pt-3">
+                <h2 class="display-4 text-danger">Não existem Empréstimos ativos para esse Livro</h2>
+            </div>
+        }
+    </div>
+</div>

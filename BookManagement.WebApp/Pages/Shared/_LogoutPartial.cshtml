@@ -1,0 +1,19 @@
+﻿@{
+    var isAuthenticate = User.Identity.IsAuthenticated;
+}
+
+@if (isAuthenticate)
+{
+    var atIndex = User.Identity.Name.IndexOf("@");
+    var userName = User.Identity.Name.Substring(0, atIndex);
+
+    <form asp-page="/Users/LogoutUser" method="post" class="navbar-left">
+        <ul class="nav navbar-nav navbar-left">
+            <li class="nav-item">
+                <button type="submit" title="Logout" style="width:auto;" class="nav-link btn btn-link text-light bi bi-box-arrow-right">
+                    @userName
+                </button>
+            </li>
+        </ul>
+    </form>
+}

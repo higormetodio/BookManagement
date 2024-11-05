@@ -1,0 +1,51 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Books.BookDetailsModel
+@{
+    ViewData["Title"] = "Detalhes do Livro";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Detalhes do Livro</h2>
+
+        <partial name="_MessagePartial"></partial>
+
+        <form class="row">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <input type="text" id="id" class="form-control" style="width: 100px;" value="@Model.Book.Id" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" id="titulo" class="form-control" style="width: 550px" value="@Model.Book.Title" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <input type="text" id="autor" class="form-control" style="width: 400px;" value="@Model.Book.Author" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" id="isbn" class="form-control" style="width: 200px;" value="@Model.Book.ISBN" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="ano-publicacao" class="form-label">Ano de Publicação</label>
+                <input type="text" id="ano-publicacao" class="form-control" style="width: 100px;" value="@Model.Book.PublicationYear" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade</label>
+                <input type="text" id="quantidade" class="form-control" style="width: 100px;" value="@Model.Book.Quantity" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="quantidade-emprestada" class="form-label">Quantidade Emprestadas</label>
+                <input type="text" id="quantidade-emprestada" class="form-control" style="width: 100px;" value="@Model.Book.LoanQuantity" readonly />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <a asp-page="/Books/Index" class="btn btn-outline-secondary">Cancelar</a>
+                <a asp-page="/Books/UpdateBook" asp-route-id="@Model.Book.Id" title="Atualizar" class="btn btn-primary btn-warning">Atualizar</a>
+                <a asp-page="/Books/DeleteBook" asp-route-id="@Model.Book.Id" title="Deletar" class="btn btn-primary btn-danger">Deletar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

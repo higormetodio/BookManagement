@@ -1,0 +1,42 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Loans.ReturnLoanModel
+@{
+    ViewData["Title"] = "Devolução de Empréstimo";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Devolução de Empréstimo</h2>
+        <br />
+        <h4 class="text-danger text-center">Deseja realmente realizar a devolução abaixo?</h4>
+
+        <partial name="_MessagePartial" />
+
+        <form class="row" method="post">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <input type="number" id="id" class="form-control" style="width: 100px" value="@Model.Loan.Id" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuário</label>
+                <input type="text" id="usuario" class="form-control" style="width: 400px" value="@Model.Loan.UserName" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="livro" class="form-label">Livro</label>
+                <input type="text" id="livro" class="form-control" style="width: 550px;" value="@Model.Loan.BookTitle" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="dataEmpréstimo" class="form-label">Data de Empréstimo</label>
+                <input type="text" id="dataEmpréstimo" class="form-control" style="width: 200px;" value="@Model.Loan.LoanDate.ToString("dd/MM/yyyy")" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="dataDevolucao" class="form-label">Data de Devolução</label>
+                <input type="text" id="dataDevolucao" class="form-control" style="width: 200px;" value="@Model.Loan.ReturnDate.ToString("dd/MM/yyyy")" readonly />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <a asp-page="/Loans/LoanDetails" asp-route-id="@Model.Loan.Id" class="btn btn-outline-secondary">Não</a>
+                <button class="btn btn-primary btn-danger" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
+</div>

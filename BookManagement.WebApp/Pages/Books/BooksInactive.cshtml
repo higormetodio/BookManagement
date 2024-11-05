@@ -1,0 +1,50 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Books.BooksInactiveModel
+@{
+    ViewData["Title"] = "Livros Inativos";
+}
+
+<h2>Livros Inativos</h2>
+<hr />
+
+<partial name="_MessagePartial"></partial>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Books/Index" class="btn btn-secondary">
+                    <span title="Listar Livros" class="fas fa-plus"></span>Listar Livros
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Título</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Ano de Pulicação</th>
+                <th scope="col" class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.PublicationYear</td>
+                    <td class="text-center">
+                        <a asp-page="/Books/ActiveBook" asp-route-id="@book.Id" title="Reativar" class="btn btn-sm btn-success bi bi-arrow-left-square"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

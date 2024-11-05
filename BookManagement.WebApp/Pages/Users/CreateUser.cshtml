@@ -1,0 +1,39 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Users.Index1Model
+@{
+    ViewData["Title"] = "Cadastrar Usuário";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Cadastrar Usuário</h2>
+
+        <partial name="_MessagePartial"></partial>
+
+        <form class="row" method="post">            
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input asp-for="Name" class="form-control" style="width: 550px" autofocus />
+            </div>
+            <div class="mb-3">
+                <label for="e-mail" class="form-label">E-mail</label>
+                <input asp-for="Email" type="email" class="form-control" style="width: 400px;" />
+            </div>
+            <div class="mb-3">
+                <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                <input asp-for="BirthDate" type="date" class="form-control" style="width: 200px;" value="" />
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input asp-for="Password" type="password" class="form-control" style="width: 200px;" />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <button class="btn btn-primary btn-success" type="submit">Salvar</button>
+                <a asp-page="/Users/Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+
+            <div class="col text-danger validation-summary-erros d-flex justify-content-start mb-4" asp-validation-summary="All"></div>
+
+        </form>
+    </div>
+</div>

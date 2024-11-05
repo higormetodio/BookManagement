@@ -1,0 +1,52 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Users.IndexModel
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<h2>Usuários</h2>
+<hr />
+
+<partial name="_MessagePartial"></partial>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Users/CreateUser" class="btn btn-primary">
+                    <span title="Cadastrar Usuário" class="fas fa-plus"></span>Novo Usuário
+                </a>
+                <a asp-page="/Users/UsersInactive" class="btn btn-primary btn-warning">
+                    <span title="Usuários Inativos" class="fas fa-plus"></span>Usuários Inativos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col" class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td class="text-center">
+                        <a asp-page="/Users/UserDetails" asp-route-id="@user.Id" title="Detalhar" class="btn btn-sm btn-info bi bi-list-ul"></a>
+                        <a asp-page="/Users/UserLoans" asp-route-id="@user.Id" title="Empréstimos" class="btn btn-sm btn-secondary bi bi-bookmark-check"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

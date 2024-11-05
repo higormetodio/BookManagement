@@ -1,0 +1,41 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Users.UserDetailsModel
+@{
+    ViewData["Title"] = "Detalhes do Usuário";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Detalhes do Usuário</h2>
+
+        <partial name="_MessagePartial"></partial>
+
+        <form class="row">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <input type="text" id="id" class="form-control" style="width: 100px;" value="@Model.User.Id" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" id="nome" class="form-control" style="width: 550px" value="@Model.User.Name" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" id="email" class="form-control" style="width: 400px;" value="@Model.User.Email" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                <input type="text" id="dataNascimento" class="form-control" style="width: 400px;" value="@Model.User.BirthDate.ToString("dd/MM/yyyy")" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" id="senha" class="form-control" style="width: 400px;" value="@Model.User.Password" readonly />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <a asp-page="/Users/Index" class="btn btn-outline-secondary">Cancelar</a>
+                <a asp-page="/Users/UpdateUser" asp-route-id="@Model.User.Id" title="Atualizar" class="btn btn-primary btn-warning">Atualizar</a>
+                <a asp-page="/Users/DeleteUser" asp-route-id="@Model.User.Id" title="Deletar" class="btn btn-primary btn-danger">Deletar</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Loans.LoanDetailsModel
+@{
+    ViewData["Title"] = "Detalhes do Empréstimo";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Detalhes do Empréstimo</h2>
+
+        <partial name="_MessagePartial"></partial>
+
+        <form class="row">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <input type="text" id="id" class="form-control" style="width: 100px;" value="@Model.Loan.Id" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuário</label>
+                <input type="text" id="usuario" class="form-control" style="width: 400px" value="@Model.Loan.UserName" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="livro" class="form-label">Livro</label>
+                <input type="text" id="livro" class="form-control" style="width: 550px;" value="@Model.Loan.BookTitle" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="dataEmprestimo" class="form-label">Data do Empréstimo</label>
+                <input type="text" id="dataEmprestimo" class="form-control" style="width: 200px;" value="@Model.Loan.LoanDate.ToString("dd/MM/yyyy")" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="dataDevolucao" class="form-label">Data de Devolução</label>
+                <input type="text" id="dataDevolucao" class="form-control" style="width: 200px;" value="@Model.Loan.ReturnDate.ToString("dd/MM/yyyy")" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <input type="text" id="status" class="form-control" style="width: 100px;" value="@Model.Loan.Status" readonly />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <a asp-page="/Loans/Index" class="btn btn-outline-secondary">Cancelar</a>
+                @if (Model.Loan.Status != LoanStatus.Returned.ToString())
+                {
+                    <a asp-page="/Loans/ReturnLoan" asp-route-id="@Model.Loan.Id" title="Devolver" class="btn btn-secondary btn-warning">Devolver</a>
+                }
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Books.IndexModel
+@{
+    ViewData["Title"] = "Livros";
+}
+
+<h2>Livros</h2>
+<hr />
+
+<partial name="_MessagePartial"></partial>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Books/CreateBook" class="btn btn-primary">
+                    <span title="Cadastrar Livro" class="fas fa-plus"></span>Novo Livro
+                </a>
+                <a asp-page="/Books/BooksInactive" class="btn btn-primary btn-warning">
+                    <span title="Livros Inativos" class="fas fa-plus"></span>Livros Inativos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Título</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Ano de Pulicação</th>
+                <th scope="col" class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.PublicationYear</td>
+                    <td class="text-center">
+                        <a asp-page="/Books/BookDetails" asp-route-id="@book.Id" title="Detalhar" class="btn btn-sm btn-info bi bi-list-ul"></a>
+                        <a asp-page="/Books/BookLoans" asp-route-id="@book.Id" title="Empréstimos" class="btn btn-sm btn-secondary bi bi-bookmark-check"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,40 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Users.UpdateUserModel
+@{
+    ViewData["Title"] = "Atualizar Usuário";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Atualizar Usuário</h2>
+
+        <partial name="_MessagePartial"></partial>
+
+        <form class="row" method="post">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <input asp-for="Id" class="form-control" style="width: 550px" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input asp-for="Name" class="form-control" style="width: 550px" autofocus />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" style="width: 400px;" />
+            </div>
+            <div class="mb-3">
+                <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                <input asp-for="BirthDate" class="form-control" style="width: 200px;" />
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input asp-for="Password" class="form-control" style="width: 200px;" />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <button class="btn btn-primary btn-success" type="submit">Salvar</button>
+                <a asp-page="/Users/UserDetails" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

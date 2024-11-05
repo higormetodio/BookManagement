@@ -1,0 +1,59 @@
+﻿@page
+@model LoginUserModel
+@{
+    ViewData["Title"] = "Login User";
+    Layout = "_CustomLayout";
+    var returnUrl = "";
+
+    if (HttpContext.Request.Query.ContainsKey("ReturnUrl"))
+    {
+        returnUrl = HttpContext.Request.Query.ContainsKey("ReturnUrl").ToString();
+    }
+}
+
+<form method="post">
+    <input type="hidden" name="ReturnUrl" id="ReturnUrl" value="@returnUrl"/>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5 rounded-3 shadow-lg p-3 mb-5 bg-white">
+                <div class="card-body p-5 text-center">
+
+                    <h3 class="md-5 pb-5">Login</h3>
+
+                    <partial name="_MessagePartial"></partial>
+
+                    <div class="form-outline mb-4">
+                        <input asp-for="Email" class="form-control form-control-lg" autofocus placeholder="Email">
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input asp-for="Password" class="form-control from-control-lg" placeholder="Password">
+                    </div>
+
+                    <div class="form-check d-flex justify-content-start mb-4">
+                        <input asp-for="Remember" class="form-check-input" type="checkbox">
+                        <label asp-for="Remember" class="form-check-label">&ensp;Lembre-me</label>
+                    </div>
+
+                    <div class="col text-danger validation-summary-erros" asp-validation-summary="All"></div>
+
+                    <div class="col">
+                        <a href="#">Esquceu a senha?</a>
+                    </div>
+
+                    <br class="my-4" />
+
+                    <button class="btn btn-outline-primary btn-lg px-5" type="submit">Login</button>
+
+                    <hr class="my-4" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

@@ -1,0 +1,35 @@
+﻿@page
+@model BookManagement.WebApp.Pages.Users.DeleteUserModel
+@{
+    ViewData["Title"] = "Eclusão de Usuário";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="form-container">
+        <h2 class="text-center">Exclusão do Usuário</h2>
+        <br />
+        <h4 class="text-danger text-center">Deseja realmente excluir o usuário abaixo?</h4>
+
+        <partial name="_MessagePartial" />
+
+        <form class="row" method="post">
+            <input type="hidden" asp-for="@Model.User.Id" />
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" id="nome" class="form-control" style="width: 550px" value="@Model.User.Name" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" id="email" class="form-control" style="width: 400px;" value="@Model.User.Email" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                <input type="text" id="dataNascimento" class="form-control" style="width: 200px;" value="@Model.User.BirthDate.ToString("dd/MM/yyyy")" readonly />
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <a asp-page="/Books/BookDetails" asp-route-id="@Model.User.Id" class="btn btn-outline-secondary">Não</a>
+                <button class="btn btn-primary btn-danger" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
+</div>

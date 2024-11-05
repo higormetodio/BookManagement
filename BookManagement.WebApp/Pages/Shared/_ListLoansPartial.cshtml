@@ -1,0 +1,40 @@
+﻿@model IEnumerable<LoanViewModel>
+@{
+
+}
+
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Livro</th>
+                <th scope="col">Data do Empréstimo</th>
+                <th scope="col">Data do Devolução</th>
+                <th scope="col">Status</th>
+                <th scope="col" style="text-align: center">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in Model)
+            {
+                <tr>
+                    <td>@loan.Id</td>
+                    <td>@loan.UserName</td>
+                    <td>@loan.BookTitle</td>
+                    <td>@loan.LoanDate.ToString("dd-MM-yyyy")</td>
+                    <td>@loan.ReturnDate.ToString("dd-MM-yyyy")</td>
+                    <td>@loan.Status</td>
+                    <td style="text-align: center">
+                        <a asp-page="/Loans/LoanDetails" asp-route-id="@loan.Id" title="Detalhar" class="btn btn-sm btn-secondary btn-info bi bi-list-ul"></a>
+                        @if (loan.Status != LoanStatus.Returned.ToString())
+                        {
+                            <a asp-page="/Loans/ReturnLoan" asp-route-id="@loan.Id" title="Devolver" class="btn btn-sm btn-secondary btn-warning bi bi-box-arrow-left"></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
