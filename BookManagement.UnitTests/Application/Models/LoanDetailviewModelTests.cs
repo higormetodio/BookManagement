@@ -31,8 +31,8 @@ public class LoanDetailviewModelTests
         Assert.Equal(loan.User.Name, loanDetailViewModel.UserName);
         Assert.Equal(loan.BookId, loanDetailViewModel.BookId);
         Assert.Equal(loan.Book.Title, loanDetailViewModel.BookTitle);
-        Assert.Equal(loan.LoanDate.ToString("MM-dd-yyyy"), loanDetailViewModel.LoanDate);
-        Assert.Equal(loan.ReturnDate.ToString("MM-dd-yyyy"), loanDetailViewModel.ReturnDate);
+        Assert.Equal(loan.LoanDate, loanDetailViewModel.LoanDate);
+        Assert.Equal(loan.ReturnDate, loanDetailViewModel.ReturnDate);
         Assert.Equal(loan.Status.ToString(), loanDetailViewModel.Status);
     }
 }

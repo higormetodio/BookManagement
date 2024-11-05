@@ -38,7 +38,7 @@ public class BeforeLateLoanNotificationService : BackgroundService
                 {
                     string message = $"Hi {loan.User.Name}, your loan for book {loan.Book.Title} must be returned tomorrow. Thanks!";
 
-                    await _emailService.SendEmailAsync(loan.User.Name, loan.User.Email, subject, message);
+                    //await _emailService.SendEmailAsync(loan.User.Name, loan.User.Email, subject, message);
                 }
             }
 

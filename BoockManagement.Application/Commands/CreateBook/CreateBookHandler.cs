@@ -1,4 +1,5 @@
 ﻿using BookManagement.Application.Models;
+using BookManagement.Core.Entities;
 using BookManagement.Core.Repositories;
 using MediatR;
 
@@ -14,7 +15,14 @@ public class CreateBookHandler : IRequestHandler<CreateBookCommand, ResultViewMo
 
     public async Task<ResultViewModel<int>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
     {
-        var book = request.ToEntity();
+        var book = await _repository.GetBookByIsbnAsync(request.ISBN);
+        
+        if (book != null)
+        {
+            return ResultViewModel<int>.Error("Book with ISBN already created");
+        }
+        
+        book = request.ToEntity();
 
         await _repository.CreateBookAsync(book);
 

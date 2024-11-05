@@ -26,6 +26,6 @@ public class BookViewModelTests
         Assert.Equal(book.Title, bookViewModel.Title);
         Assert.Equal(book.Author, bookViewModel.Author);
         Assert.Equal(book.PublicationYear, bookViewModel.PublicationYear);
-        Assert.Equal(book.IsReserved, bookViewModel.IsReserved);
+        Assert.Equal(book.Active, bookViewModel.Active);
     }
 }

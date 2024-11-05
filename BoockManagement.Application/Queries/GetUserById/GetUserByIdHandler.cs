@@ -16,7 +16,7 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, ResultViewMo
     {
         var user = await _repository.GetUserByIdAsync(request.Id); 
 
-        if (user is null || !user.Active)
+        if (user is null)
         {
             return ResultViewModel<UserViewModel>.Error("User not found.");
         }

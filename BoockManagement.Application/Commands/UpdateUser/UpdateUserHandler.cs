@@ -17,7 +17,7 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, ResultViewMo
 
     public async Task<ResultViewModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _repository.GetUserByIdAsync(request.Id);
+        var user = await _repository.GetUserByIdAsync(request.UserId);
 
         if (user is null || !user.Active)
         {

@@ -40,7 +40,7 @@ public class UsersController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         return Ok(result);
@@ -60,7 +60,7 @@ public class UsersController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         var loginEmail = User.FindFirst("userName")!.Value;
@@ -88,7 +88,7 @@ public class UsersController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         var loginEmail = User.FindFirst("userName")!.Value;
@@ -123,16 +123,14 @@ public class UsersController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Post(CreateUserCommand command)
     {
-        var isAdmin = User.IsInRole("admin");
-
-        if (isAdmin)
+        var result = await _mediator.Send(command);
+        
+        if (!result.IsSuccess)
         {
-            command.Role = "admin";
+            return BadRequest(result);
         }
 
-        var result = await _mediator.Send(command);
-
-        return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
+        return CreatedAtAction(nameof(GetById), new { Id = result.Data }, result);
     }
 
     /// <summary>
@@ -148,10 +146,10 @@ public class UsersController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
     }
 
     /// <summary>
@@ -189,10 +187,10 @@ public class UsersController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
 
     }
 
@@ -209,10 +207,10 @@ public class UsersController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
     }
 
     /// <summary>
@@ -220,7 +218,7 @@ public class UsersController : ControllerBase
     /// </summary>
     /// <param name="command"></param>
     /// <returns>A login user with email and token</returns>
-    [HttpPut("login")]
+    [HttpPost("login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(LoginUserCommand command)
     {
@@ -228,7 +226,7 @@ public class UsersController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         return Ok(result);

@@ -95,7 +95,7 @@ public class UsersControllerTests
         //Arrange
         var updateUserCommand = new UpdateUserCommand
         {
-            Id = 10,
+            UserId = 10,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -115,7 +115,7 @@ public class UsersControllerTests
         //Arrange
         var updateUserCommand = new UpdateUserCommand
         {
-            Id = 4,
+            UserId = 4,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -235,7 +235,7 @@ public class UsersControllerTests
         //Arrange
         var updateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),

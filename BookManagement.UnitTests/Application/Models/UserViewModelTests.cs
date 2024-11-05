@@ -22,13 +22,16 @@ public class UserViewModelTests
         var user = await _userRepository.GetUserByIdAsync(1);
 
         //Act
-        var userViewModel = new UserViewModel(user.Id, user.Name, user.Email);
+        var userViewModel = new UserViewModel(user.Id, user.Name, user.Email, user.BirthDate, user.Password, user.Active);
 
         //Assert
         Assert.NotNull(userViewModel);
         Assert.Equal(user.Id, userViewModel.Id);
         Assert.Equal(user.Name, userViewModel.Name);
         Assert.Equal(user.Email, userViewModel.Email);
+        Assert.Equal(user.BirthDate, userViewModel.BirthDate);
+        Assert.Equal(user.Password, userViewModel.Password);
+        Assert.Equal(user.Active, userViewModel.Active);
 
     }
 }

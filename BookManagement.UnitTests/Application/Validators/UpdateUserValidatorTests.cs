@@ -29,7 +29,7 @@ public class UpdateUserValidatorTests
         var result = await _validator.TestValidateAsync(userUpdateUserCommand);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(u => u.Id)
+        result.ShouldHaveValidationErrorFor(u => u.UserId)
               .WithErrorMessage("The Id cannot be empty or zero.");
     }
 
@@ -39,7 +39,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = -1,
+            UserId = -1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -50,7 +50,7 @@ public class UpdateUserValidatorTests
         var result = await _validator.TestValidateAsync(userUpdateUserCommand);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(u => u.Id)
+        result.ShouldHaveValidationErrorFor(u => u.UserId)
               .WithErrorMessage("Invalid Id.");
     }
 
@@ -60,7 +60,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -81,7 +81,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -102,7 +102,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "",
             BirthDate = new DateTime(1987, 7, 3),
@@ -123,7 +123,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael.gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -144,7 +144,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -165,7 +165,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -186,7 +186,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             Password = ""
@@ -206,7 +206,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1800, 7, 3),
@@ -227,7 +227,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = DateTime.Now.AddYears(2),
@@ -248,7 +248,7 @@ public class UpdateUserValidatorTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),

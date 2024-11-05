@@ -28,8 +28,8 @@ public class LoanWithBookViewModelTests
         Assert.NotNull(loanWithBookViewModel);
         Assert.Equal(loan.Id, loanWithBookViewModel.LoanId);
         Assert.Equal(loan.Book.Title, loanWithBookViewModel.BookTitle);
-        Assert.Equal(loan.LoanDate.ToString("MM-dd-yyyy"), loanWithBookViewModel.LoanDate);
-        Assert.Equal(loan.ReturnDate.ToString("MM-dd-yyyy"), loanWithBookViewModel.ReturnDate);
+        Assert.Equal(loan.LoanDate, loanWithBookViewModel.LoanDate);
+        Assert.Equal(loan.ReturnDate, loanWithBookViewModel.ReturnDate);
         Assert.Equal(loan.Status.ToString(), loanWithBookViewModel.Status);
     }
 }

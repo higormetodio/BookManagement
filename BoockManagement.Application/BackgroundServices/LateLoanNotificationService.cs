@@ -39,12 +39,15 @@ public class LateLoanNotificationService : BackgroundService
 
                 foreach (var loan in loans)
                 {
-                    loan.LoanLate();
-                    await loanRepository.UpdateLoanAsync(loan);
+                    if (loan.Status != LoanStatus.Late)
+                    {
+                        loan.LoanLate();
+                        await loanRepository.UpdateLoanAsync(loan);
+                    }                    
 
                     string message = $"Hi {loan.User.Name}, your loan for book {loan.Book.Title} is late and the book muste be returned. We are waiting. Thanks!";
 
-                    await _emailService.SendEmailAsync(loan.User.Name, loan.User.Email, subject, message);
+                    //await _emailService.SendEmailAsync(loan.User.Name, loan.User.Email, subject, message);
                 }
             }
 

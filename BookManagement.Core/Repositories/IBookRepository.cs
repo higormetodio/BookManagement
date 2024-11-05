@@ -5,6 +5,7 @@ public interface IBookRepository
 {
     Task<IEnumerable<Book>> GetAllBooksAsync();
     Task<Book> GetBookByIdAsync(int id);
+    Task<Book> GetBookByIsbnAsync(string isbn);
     Task<Book> GetBookLoansByIdAsync(int id);
     Task<int> CreateBookAsync(Book book);
     Task<int> UpdateBookStockAsync(BookStock stock);

@@ -14,8 +14,7 @@ public class LoanRepository : ILoanRepository
     }
 
     public async Task<IEnumerable<Loan>> GetAllLoansAsync()
-        => await _context.Loans.AsNoTracking()
-                               .Include(l => l.User)
+        => await _context.Loans.Include(l => l.User)
                                .Include(l => l.Book)
                                .ToListAsync();
 

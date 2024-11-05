@@ -14,7 +14,7 @@ public class UpdateBookHandler : IRequestHandler<UpdateBookCommand, ResultViewMo
 
     public async Task<ResultViewModel> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
     {
-        var book = await _repository.GetBookByIdAsync(request.Id);
+        var book = await _repository.GetBookByIdAsync(request.BookId);
 
         if (book is null || !book.Active)
         {

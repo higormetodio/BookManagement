@@ -96,7 +96,7 @@ public class BooksControllerTests
         //Arrange
         var updateBookCommand = new UpdateBookCommand
         {
-            Id = 10,
+            BookId = 10,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -115,7 +115,7 @@ public class BooksControllerTests
         //Arrange
         var updateBookCommand = new UpdateBookCommand
         {
-            Id = 4,
+            BookId = 4,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -311,7 +311,7 @@ public class BooksControllerTests
         //Arrange
         var updateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",

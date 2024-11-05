@@ -29,7 +29,7 @@ public class UpdateBookValidatorTests
         var result = await _validator.TestValidateAsync(bookUpdateBookCommand);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(b => b.Id)
+        result.ShouldHaveValidationErrorFor(b => b.BookId)
               .WithErrorMessage("The Id cannot be empty or zero.");
     }
 
@@ -38,7 +38,7 @@ public class UpdateBookValidatorTests
     {
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = -10,
+            BookId = -10,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -49,7 +49,7 @@ public class UpdateBookValidatorTests
         var result = await _validator.TestValidateAsync(bookUpdateBookCommand);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(b => b.Id)
+        result.ShouldHaveValidationErrorFor(b => b.BookId)
               .WithErrorMessage("Invalid Id.");
     }
 
@@ -59,7 +59,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -80,7 +80,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -101,7 +101,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "",
             ISBN = "B00VQGOWH4",
@@ -122,7 +122,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaumooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo",
             ISBN = "B00VQGOWH4",
@@ -163,7 +163,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH400000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -184,7 +184,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -205,7 +205,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -226,7 +226,7 @@ public class UpdateBookValidatorTests
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",

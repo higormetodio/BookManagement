@@ -63,4 +63,9 @@ public class FakeBookRepository : IBookRepository
 
         return book.Id;
     }
+
+    public Task<Book> GetBookByIsbnAsync(string isbn)
+    {
+        throw new NotImplementedException();
+    }
 }

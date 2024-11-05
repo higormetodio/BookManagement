@@ -15,8 +15,7 @@ public class BookRepository : IBookRepository
 
     public async Task<IEnumerable<Book>> GetAllBooksAsync()
     {
-        var books = await _context.Books.AsNoTracking()
-                                        .Include(s => s.Stock)                                        
+        var books = await _context.Books.Include(s => s.Stock)                                        
                                         .ToListAsync();
 
         return books;
@@ -26,9 +25,12 @@ public class BookRepository : IBookRepository
         => await _context.Books.Include(s => s.Stock)
                                .SingleOrDefaultAsync(b => b.Id == id);
 
+    public async Task<Book> GetBookByIsbnAsync(string isbn)
+        => await _context.Books.Include(s => s.Stock)
+                               .SingleOrDefaultAsync(b => b.ISBN == isbn);
+
     public async Task<Book> GetBookLoansByIdAsync(int id)
-        => await _context.Books.AsNoTracking()
-                               .Include(b => b.Loans)
+        => await _context.Books.Include(b => b.Loans)
                                .ThenInclude(l => l.User)
                                .Include(b => b.Stock)
                                .SingleOrDefaultAsync(b => b.Id == id);

@@ -39,7 +39,7 @@ public class BooksController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         return Ok(result);
@@ -58,7 +58,7 @@ public class BooksController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         return Ok(result);
@@ -77,7 +77,7 @@ public class BooksController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         return Ok(result);
@@ -101,11 +101,16 @@ public class BooksController : ControllerBase
     /// <returns>A new Book object created</returns>
     /// <remarks>Return a new Book object created</remarks>
     [HttpPost]
-    public async Task<ActionResult> Post(CreateBookCommand command)
+    public async Task<IActionResult> Post(CreateBookCommand command)
     {
         var result = await _mediator.Send(command);
 
-        return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result);
+        }
+
+        return CreatedAtAction(nameof(GetById), new { Id = result.Data }, result);
     }
 
     /// <summary>
@@ -120,10 +125,10 @@ public class BooksController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
     }
 
     /// <summary>
@@ -138,10 +143,10 @@ public class BooksController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
     }
 
     /// <summary>
@@ -178,10 +183,10 @@ public class BooksController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
     }
 
     /// <summary>
@@ -196,9 +201,9 @@ public class BooksController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
     }
 }

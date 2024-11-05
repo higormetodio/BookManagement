@@ -25,7 +25,7 @@ public class UpdateUserCommandTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 10,
+            UserId = 10,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -49,7 +49,7 @@ public class UpdateUserCommandTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 4,
+            UserId = 4,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -73,7 +73,7 @@ public class UpdateUserCommandTests
         //Arrange
         var userUpdateUserCommand = new UpdateUserCommand
         {
-            Id = 1,
+            UserId = 1,
             Name = "Rafael Oliveira",
             Email = "rafael@gmail.com",
             BirthDate = new DateTime(1987, 7, 3),
@@ -90,7 +90,7 @@ public class UpdateUserCommandTests
         Assert.NotNull(resultViewModel);
         Assert.True(resultViewModel.IsSuccess);
         Assert.NotNull(user);
-        Assert.Equal(userUpdateUserCommand.Id, user.Id);
+        Assert.Equal(userUpdateUserCommand.UserId, user.Id);
         Assert.Equal(userUpdateUserCommand.Name, user.Name);
         Assert.Equal(userUpdateUserCommand.Email, user.Email);
         Assert.Equal(userUpdateUserCommand.BirthDate, user.BirthDate);

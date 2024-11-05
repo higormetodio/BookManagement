@@ -16,7 +16,7 @@ public class GetBookByIdHandler : IRequestHandler<GetBookByIdQuery, ResultViewMo
     {
         var book = await _repository.GetBookByIdAsync(request.Id);
 
-        if (book is null || !book.Active)
+        if (book is null)
         {
             return ResultViewModel<BookDetailViewModel>.Error("Book not found");
         }

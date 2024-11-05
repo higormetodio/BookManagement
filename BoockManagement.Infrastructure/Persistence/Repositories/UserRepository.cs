@@ -14,15 +14,13 @@ public class UserRepository : IUserRepository
     }
 
     public async Task<IEnumerable<User>> GetAllUsersAsync()
-        => await _context.Users.AsNoTracking()
-                               .ToListAsync();
+        => await _context.Users.ToListAsync();
 
     public async Task<User> GetUserByIdAsync(int id)
         => await _context.Users.SingleOrDefaultAsync(b => b.Id == id);
 
     public async Task<User> GetUserLoansByIdAsync(int id)
-        => await _context.Users.AsNoTracking()
-                               .Include(u => u.Loans)
+        => await _context.Users.Include(u => u.Loans)
                                .ThenInclude(l => l.Book)
                                .SingleOrDefaultAsync(u => u.Id == id);
 

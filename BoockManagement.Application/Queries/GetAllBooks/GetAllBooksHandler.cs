@@ -17,8 +17,6 @@ public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, ResultViewMo
     {
         var books = await _repository.GetAllBooksAsync();
 
-        books = books.Where(b => b.Active).ToList();
-
         if (!request.Query.IsNullOrEmpty())
         {
             books = books.Where(b => b.Title.ToLower().Contains(request.Query.ToLower())).ToList();

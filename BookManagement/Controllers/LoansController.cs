@@ -34,7 +34,7 @@ public class LoansController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         return Ok(result);
@@ -53,7 +53,7 @@ public class LoansController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return NotFound(result.Message);
+            return NotFound(result);
         }
 
         return Ok(result);
@@ -82,10 +82,10 @@ public class LoansController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return CreatedAtAction(nameof(GetById), new { Id = result.Data }, command);
+        return CreatedAtAction(nameof(GetById), new { Id = result.Data }, result);
     }
 
     /// <summary>
@@ -101,9 +101,9 @@ public class LoansController : ControllerBase
 
         if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        return NoContent();
+        return Ok(result);
     }
 }

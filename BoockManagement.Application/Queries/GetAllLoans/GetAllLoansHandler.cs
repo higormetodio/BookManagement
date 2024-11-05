@@ -18,16 +18,9 @@ public class GetAllLoansHandler : IRequestHandler<GetAllLoansQuery, ResultViewMo
     {
         var loans = await _repository.GetAllLoansAsync();
 
-        loans = loans.Where(l => l.Status != LoanStatus.Returned).ToList();
-
         if (!string.IsNullOrEmpty(request.Query))
         {
             loans = loans.Where(l => l.Book.Title.ToLower().Contains(request.Query.ToLower())).ToList();
-        }
-
-        if (loans.IsNullOrEmpty())
-        {
-            return ResultViewModel<IEnumerable<LoanViewModel>>.Error("Loans not found.");
         }
 
         var model = loans.Select(LoanViewModel.FromEntity);

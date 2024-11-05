@@ -17,8 +17,6 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, ResultViewMo
     {
         var users = await _repository.GetAllUsersAsync();
 
-        users = users.Where(u => u.Active).ToList();
-
         if (!request.Query.IsNullOrEmpty())
         {
             users = users.Where(u => u.Name.ToLower().Contains(request.Query.ToLower())).ToList();

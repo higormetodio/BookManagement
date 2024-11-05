@@ -1,4 +1,5 @@
 ﻿using BookManagement.Application.Models;
+using BookManagement.Core.Enums;
 using BookManagement.Core.Repositories;
 using MediatR;
 
@@ -31,7 +32,7 @@ public class CreateLoanHandler : IRequestHandler<CreateLoanCommand, ResultViewMo
             return ResultViewModel<int>.Error("Book not found.");
         }
 
-        var hasBook = user.Loans.Any(l => l.BookId == book.Id);
+        var hasBook = user.Loans.Any(l => l.Status != LoanStatus.Returned && l.BookId == book.Id);
 
         if (hasBook)
         {

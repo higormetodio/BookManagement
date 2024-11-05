@@ -21,7 +21,7 @@ public class UpdateBookCoomandTestes
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 10,
+            BookId = 10,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -45,7 +45,7 @@ public class UpdateBookCoomandTestes
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 4,
+            BookId = 4,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -69,7 +69,7 @@ public class UpdateBookCoomandTestes
         //Arrange
         var bookUpdateBookCommand = new UpdateBookCommand
         {
-            Id = 1,
+            BookId = 1,
             Title = "Sistemas distribuídos: princípios e paradigmas",
             Author = "Andrew S. Tanenbaum",
             ISBN = "B00VQGOWH4",
@@ -86,7 +86,7 @@ public class UpdateBookCoomandTestes
         Assert.NotNull(resultViewModel);
         Assert.True(resultViewModel.IsSuccess);
         Assert.NotNull(book);
-        Assert.Equal(bookUpdateBookCommand.Id, book.Id);
+        Assert.Equal(bookUpdateBookCommand.BookId, book.Id);
         Assert.Equal(bookUpdateBookCommand.Title, book.Title);
         Assert.Equal(bookUpdateBookCommand.Author, book.Author);
         Assert.Equal(bookUpdateBookCommand.ISBN, book.ISBN);

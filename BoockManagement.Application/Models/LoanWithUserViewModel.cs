@@ -3,7 +3,7 @@
 namespace BookManagement.Application.Models;
 public class LoanWithUserViewModel
 {
-    public LoanWithUserViewModel(int loanId, string userName, string loanDate, string returnDate, string status)
+    public LoanWithUserViewModel(int loanId, string userName, DateTime loanDate, DateTime returnDate, string status)
     {
         LoanId = loanId;
         UserName = userName;
@@ -14,10 +14,10 @@ public class LoanWithUserViewModel
 
     public int LoanId { get; private set; }
     public string UserName { get; private set; }
-    public string LoanDate { get; private set; }
-    public string ReturnDate { get; private set; }
+    public DateTime LoanDate { get; private set; }
+    public DateTime ReturnDate { get; private set; }
     public string Status { get; private set; }
 
     public static LoanWithUserViewModel FromEntity(Loan entity)
-        => new(entity.Id, entity.User.Name, entity.LoanDate.ToString("MM-dd-yyyy"), entity.ReturnDate.ToString("MM-dd-yyyy"), entity.Status.ToString());
+        => new(entity.Id, entity.User.Name, entity.LoanDate, entity.ReturnDate, entity.Status.ToString());
 }

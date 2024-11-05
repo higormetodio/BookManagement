@@ -7,8 +7,8 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
 {
     public UpdateUserValidator()
     {
-        RuleFor(u => u.Id).NotEmpty().WithMessage("The Id cannot be empty or zero.");
-        RuleFor(u => u.Id).GreaterThanOrEqualTo(0).WithMessage("Invalid Id.");
+        RuleFor(u => u.UserId).NotEmpty().WithMessage("The Id cannot be empty or zero.");
+        RuleFor(u => u.UserId).GreaterThanOrEqualTo(0).WithMessage("Invalid Id.");
 
         RuleFor(u => u.Name).NotEmpty().WithMessage("Invalid Name. Name is required.")
                             .MaximumLength(100).WithMessage("The maximum field size for Name is 100.");

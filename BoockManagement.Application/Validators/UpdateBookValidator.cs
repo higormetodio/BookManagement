@@ -6,8 +6,8 @@ public class UpdateBookValidator : AbstractValidator<UpdateBookCommand>
 {
     public UpdateBookValidator()
     {
-        RuleFor(b => b.Id).NotEmpty().WithMessage("The Id cannot be empty or zero.");
-        RuleFor(b => b.Id).GreaterThan(0).WithMessage("Invalid Id.");
+        RuleFor(b => b.BookId).NotEmpty().WithMessage("The Id cannot be empty or zero.");
+        RuleFor(b => b.BookId).GreaterThan(0).WithMessage("Invalid Id.");
 
         RuleFor(b => b.Title).NotEmpty().WithMessage("Invalid Title. Title is required.")
                              .MaximumLength(200).WithMessage("The maximum field size for Title is 200.");
