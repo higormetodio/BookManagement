@@ -37,6 +37,8 @@ O projeto consiste em um sistema de gerenciamento de livros, que visa atender al
 
 :white_check_mark: Testes Unitátios com XUnit
 
+:white_check_mark: WebApp em Razor Pages
+
 
 ## Temas Abordados :pencil:
 :arrow_forward: Arquitetura Limpa
